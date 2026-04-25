@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERN 2026 — Workshop on Experimental Research on Networking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-alt:#f4f6f9;
+  --bg-dark:#0b1a2e;
+  --bg-panel:#0f2440;
+  --ink:#0a1628;
+  --ink-2:#33425a;
+  --ink-3:#64748b;
+  --rule:#d7dde6;
+  --rule-strong:#334155;
+  --ieee:#00629b;         /* IEEE core blue */
+  --ieee-2:#003865;       /* IEEE deep blue */
+  --ieee-light:#eaf2f8;
+  --accent:#e67e00;       /* technical orange accent */
+  --good:#14833b;
+  --warn:#b45309;
+}
+
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'IBM Plex Sans', system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono', monospace}
+.cond{font-family:'IBM Plex Sans Condensed', sans-serif}
+
+/* ==== UTILITY BAR ==== */
+.utility{
+  background:var(--bg-dark);
+  color:#cbd5e1;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.02em;
+}
+.utility .u-inner{
+  max-width:1360px; margin:0 auto;
+  padding:7px 24px;
+  display:flex; gap:20px; align-items:center; flex-wrap:wrap;
+}
+.utility a{color:#cbd5e1; text-decoration:none}
+.utility a:hover{color:#fff}
+.utility .sep{opacity:.3}
+.utility .right{margin-left:auto; display:flex; gap:16px}
+.utility .live{display:inline-flex; align-items:center; gap:6px; color:#4ade80}
+.utility .live .pulse{
+  width:6px; height:6px; border-radius:50%; background:#4ade80;
+  box-shadow:0 0 0 0 rgba(74,222,128,0.7);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(74,222,128,0.7)}
+  70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}
+  100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}
+}
+
+/* ==== MAIN HEADER ==== */
+.masthead{
+  background:#fff;
+  border-bottom:1px solid var(--rule);
+}
+.mast-inner{
+  max-width:1360px; margin:0 auto;
+  padding:18px 24px;
+  display:flex; align-items:center; gap:24px;
+}
+.logo-block{display:flex; align-items:center; gap:16px}
+.logo-mark{
+  width:48px; height:48px;
+  background:var(--ieee);
+  color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:-0.02em;
+  position:relative;
+  flex-shrink:0;
+}
+.logo-mark::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.35) 49%, rgba(255,255,255,0.35) 51%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.35) 49%, rgba(255,255,255,0.35) 51%, transparent 51%);
+  mix-blend-mode:overlay;
+}
+.logo-text .name{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ieee-2);
+  letter-spacing:-0.01em;
+  line-height:1;
+}
+.logo-text .sub{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.06em;
+  color:var(--ink-3);
+  text-transform:uppercase;
+  margin-top:4px;
+}
+.mast-right{margin-left:auto; display:flex; align-items:center; gap:16px}
+.host-chip{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 14px;
+  background:var(--ieee-light);
+  border:1px solid #bfd7e8;
+  font-size:12px;
+  color:var(--ieee-2);
+  text-decoration:none;
+}
+.host-chip strong{font-weight:600}
+.host-chip .arrow{font-family:'IBM Plex Mono', monospace; font-size:14px}
+.host-chip:hover{background:#dbeaf3}
+
+/* ==== PRIMARY NAV ==== */
+.primary-nav{
+  background:var(--ieee-2);
+  position:sticky; top:0; z-index:60;
+}
+.pn-inner{
+  max-width:1360px; margin:0 auto;
+  padding:0 24px;
+  display:flex; align-items:stretch;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  min-height:44px;
+  overflow-x:auto;
+}
+.pn-inner::-webkit-scrollbar{display:none}
+.primary-nav a{
+  color:#cbd9e8;
+  font-size:13px;
+  font-weight:500;
+  text-decoration:none;
+  padding:12px 18px;
+  display:inline-flex; align-items:center; gap:6px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  transition:background .15s, color .15s;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+.primary-nav a:first-child{border-left:1px solid rgba(255,255,255,0.08)}
+.primary-nav a:hover{background:#002949; color:#fff}
+.primary-nav a.active{background:var(--ieee); color:#fff}
+.primary-nav a .ix{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  opacity:.55;
+}
+.primary-nav .cta{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-weight:600;
+}
+.primary-nav .cta:hover{background:#d06e00; color:#fff}
+
+@media(max-width:900px){
+  .primary-nav a:not(.cta) .ix{display:none}
+  .primary-nav a{padding:10px 12px; font-size:12px}
+}
+
+/* ==== HERO ==== */
+.hero{
+  position:relative;
+  background:var(--bg-dark);
+  color:#e2e8f0;
+  overflow:hidden;
+  border-bottom:3px solid var(--accent);
+}
+#network-canvas{
+  position:absolute; inset:0; width:100%; height:100%;
+  opacity:.9;
+}
+.hero-grid{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.hero-inner{
+  position:relative; z-index:2;
+  max-width:1360px; margin:0 auto;
+  padding:72px 24px 56px;
+  min-height:calc(100vh - 120px);
+  display:flex; flex-direction:column; justify-content:center;
+}
+.hero-labels{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.tag{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:5px 10px;
+  border:1px solid rgba(226,232,240,0.3);
+  color:#cbd5e1;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.tag.bright{border-color:var(--accent); color:var(--accent)}
+.tag.ieee{border-color:#4a90c2; color:#7db5d9}
+.tag .dot{width:6px; height:6px; border-radius:50%; background:currentColor}
+
+.hero-layout{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:48px;
+  align-items:end;
+}
+.hero-title{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:clamp(44px, 7vw, 96px);
+  line-height:0.98;
+  letter-spacing:-0.025em;
+  color:#fff;
+  margin-bottom:24px;
+  max-width:1100px;
+}
+.hero-title .accent{color:var(--accent)}
+.hero-title .dim{color:#7f97b4; font-weight:500}
+
+.hero-sub{
+  font-size:18px;
+  max-width:720px;
+  color:#b8c5d6;
+  line-height:1.55;
+  margin-bottom:36px;
+}
+
+/* compact key-facts panel in hero */
+.hero-facts{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  border-top:1px solid rgba(255,255,255,0.15);
+  border-bottom:1px solid rgba(255,255,255,0.15);
+  margin-top:24px;
+}
+.hero-facts .hf-row{
+  padding:20px 22px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  display:flex; flex-direction:column; gap:6px;
+}
+.hero-facts .hf-row:last-child{border-right:none}
+.hero-facts .k{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#7f97b4;
+}
+.hero-facts .v{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:18px;
+  color:#fff;
+  line-height:1.15;
+  letter-spacing:-0.005em;
+}
+.hero-facts .v em{font-style:normal; color:var(--accent)}
+.hero-facts .v .mute{display:block; color:#7f97b4; font-weight:400; font-family:'IBM Plex Mono', monospace; font-size:11px; margin-top:2px}
+@media(max-width:900px){
+  .hero-facts{grid-template-columns:repeat(2, 1fr)}
+  .hero-facts .hf-row{border-right:none; border-bottom:1px solid rgba(255,255,255,0.08)}
+  .hero-facts .hf-row:nth-child(2n){border-right:none}
+}
+
+/* hero CTA row */
+.hero-cta{
+  padding:22px 0 32px;
+  display:flex; gap:10px; flex-wrap:wrap;
+  align-items:center;
+}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:12px 22px;
+  font-size:13.5px;
+  font-weight:600;
+  text-decoration:none;
+  font-family:inherit;
+  cursor:pointer;
+  border:none;
+  transition:background .15s, color .15s, border-color .15s;
+  letter-spacing:0.01em;
+}
+.btn-primary{background:var(--accent); color:#fff}
+.btn-primary:hover{background:#d06e00}
+.btn-ghost{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.35)}
+.btn-ghost:hover{border-color:#fff; background:rgba(255,255,255,0.05)}
+.btn-ieee{background:var(--ieee); color:#fff}
+.btn-ieee:hover{background:var(--ieee-2)}
+.btn-outline{background:transparent; color:var(--ieee-2); border:1px solid var(--ieee-2)}
+.btn-outline:hover{background:var(--ieee-2); color:#fff}
+.btn .arrow{font-family:'IBM Plex Mono', monospace; font-weight:400}
+
+/* ==== COUNTDOWN BAND ==== */
+.cd-band{
+  background:var(--bg-alt);
+  border-bottom:1px solid var(--rule);
+}
+.cd-inner{
+  max-width:1360px; margin:0 auto;
+  padding:20px 24px;
+  display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.cd-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+.cd-label strong{color:var(--ieee-2); font-weight:600}
+.cd-units{display:flex; gap:12px}
+.cd-unit{
+  background:#fff;
+  border:1px solid var(--rule);
+  padding:10px 18px;
+  min-width:76px;
+  text-align:center;
+}
+.cd-unit .num{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-size:28px;
+  font-weight:700;
+  color:var(--ieee-2);
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.01em;
+}
+.cd-unit .u{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9.5px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-top:6px;
+}
+.cd-target{
+  margin-left:auto;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  color:var(--ink-2);
+}
+.cd-target strong{color:var(--accent)}
+
+/* ==== SECTIONS ==== */
+section{padding:72px 24px; border-bottom:1px solid var(--rule)}
+.sec-inner{max-width:1360px; margin:0 auto}
+.sec-head{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:40px;
+  margin-bottom:40px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--rule);
+  align-items:end;
+}
+.sec-head .meta{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ieee);
+}
+.sec-head .meta .sep{color:var(--rule); margin:0 8px}
+.sec-head h2{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:clamp(32px, 4vw, 48px);
+  line-height:1;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+.sec-head h2 + p{
+  font-size:15px; color:var(--ink-2); margin-top:12px; max-width:780px;
+}
+@media(max-width:760px){
+  .sec-head{grid-template-columns:1fr; gap:16px; padding-bottom:16px}
+  section{padding:56px 20px}
+}
+
+/* ==== ABOUT ==== */
+.about-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:48px;
+}
+.about-grid .lead{
+  font-size:22px;
+  color:var(--ink);
+  line-height:1.4;
+  font-weight:400;
+  margin-bottom:20px;
+  max-width:860px;
+  letter-spacing:-0.005em;
+}
+.about-grid .lead em{font-style:normal; color:var(--ieee); font-weight:600}
+.about-grid p{font-size:15px; color:var(--ink-2); margin-bottom:14px; max-width:720px}
+.about-grid p strong{color:var(--ink); font-weight:600}
+.about-side{
+  background:var(--bg-alt);
+  border-left:3px solid var(--ieee);
+  padding:24px;
+}
+.about-side h4{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--ieee-2);
+  margin-bottom:12px;
+}
+.about-side ul{list-style:none; padding:0}
+.about-side li{
+  font-size:13.5px;
+  color:var(--ink-2);
+  padding:8px 0;
+  border-bottom:1px dashed var(--rule);
+  display:flex; justify-content:space-between; gap:12px;
+}
+.about-side li:last-child{border-bottom:none}
+.about-side li span:last-child{
+  font-family:'IBM Plex Mono', monospace;
+  color:var(--ink);
+  font-size:12.5px;
+}
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+}
+.scope-callout{
+  margin-top:24px;
+  padding:16px 20px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-left:3px solid var(--warn);
+  font-size:13.5px;
+  color:#7c2d12;
+  max-width:860px;
+  display:flex; gap:12px;
+}
+.scope-callout .icon{
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:700;
+  color:var(--warn);
+  flex-shrink:0;
+}
+.scope-callout strong{color:#7c2d12; font-weight:600}
+
+/* ==== TOPICS ==== */
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  border:1px solid var(--rule);
+  background:var(--rule);
+  gap:1px;
+}
+.topic{
+  background:#fff;
+  padding:20px;
+  display:flex; flex-direction:column; gap:8px;
+  min-height:150px;
+  border-top:3px solid transparent;
+  transition:border-color .15s, background .15s;
+}
+.topic:hover{border-top-color:var(--ieee); background:#fafcfe}
+.topic .idx{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.06em;
+  color:var(--ieee);
+  font-weight:500;
+}
+.topic h4{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:17px;
+  color:var(--ink);
+  line-height:1.2;
+}
+.topic p{font-size:13px; color:var(--ink-2); line-height:1.5}
+
+/* ==== DATES ==== */
+.dates-table{
+  border:1px solid var(--rule);
+  background:#fff;
+}
+.dates-head{
+  display:grid;
+  grid-template-columns:200px 1fr 180px 100px;
+  background:var(--bg-dark);
+  color:#cbd5e1;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:10px 16px;
+}
+.dates-head > div{padding:0 4px}
+.date-row{
+  display:grid;
+  grid-template-columns:200px 1fr 180px 100px;
+  padding:18px 16px;
+  border-bottom:1px solid var(--rule);
+  align-items:center;
+  gap:8px;
+  transition:background .15s;
+}
+.date-row:last-child{border-bottom:none}
+.date-row:hover{background:var(--bg-alt)}
+.date-row.key{background:#fff7ed; border-left:3px solid var(--accent); padding-left:13px}
+.date-row.key:hover{background:#ffedd5}
+.date-row .when{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:13px;
+  color:var(--ink);
+  font-weight:500;
+}
+.date-row .what{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:17px;
+  color:var(--ink);
+}
+.date-row .what .mute{color:var(--ink-3); font-weight:400}
+.date-row .status{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.04em;
+  color:var(--ink-3);
+  display:inline-flex; align-items:center; gap:6px;
+}
+.date-row .status.open{color:var(--good)}
+.date-row .status.open::before{
+  content:""; width:6px; height:6px; border-radius:50%;
+  background:var(--good);
+  box-shadow:0 0 0 3px rgba(20,131,59,0.18);
+}
+.date-row .status.upcoming::before{
+  content:""; width:6px; height:6px; border-radius:50%; background:#94a3b8;
+}
+.date-row .aoe{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  color:var(--ink-3);
+  text-align:right;
+}
+@media(max-width:760px){
+  .dates-head{display:none}
+  .date-row{grid-template-columns:1fr; gap:4px}
+}
+
+/* ==== PROGRAM ==== */
+.program-wrap{
+  border:1px solid var(--rule);
+  background:#fff;
+}
+.program-head{
+  display:grid;
+  grid-template-columns:140px 1fr 120px;
+  padding:10px 20px;
+  background:var(--bg-dark);
+  color:#cbd5e1;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.prog-row{
+  display:grid;
+  grid-template-columns:140px 1fr 120px;
+  padding:16px 20px;
+  border-bottom:1px solid var(--rule);
+  gap:16px;
+  align-items:center;
+}
+.prog-row:last-child{border-bottom:none}
+.prog-row .time{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:13px;
+  color:var(--ink-2);
+  font-variant-numeric:tabular-nums;
+}
+.prog-row .title{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:17px;
+  color:var(--ink);
+  line-height:1.2;
+}
+.prog-row .detail{
+  font-size:12.5px;
+  color:var(--ink-3);
+  margin-top:2px;
+}
+.prog-row .duration{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  text-align:right;
+}
+.prog-row.keynote{background:#eaf2f8; border-left:3px solid var(--ieee); padding-left:17px}
+.prog-row.keynote .title{color:var(--ieee-2)}
+.prog-row.session{background:#fafcfe}
+.prog-row.session .title{color:var(--ieee)}
+.prog-row.break{background:#f8fafc}
+.prog-row.break .title{color:var(--ink-3); font-weight:500}
+.track-badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.06em;
+  padding:2px 6px;
+  background:var(--ieee-light);
+  color:var(--ieee-2);
+  border:1px solid #bfd7e8;
+  margin-left:8px;
+  vertical-align:middle;
+}
+@media(max-width:760px){
+  .program-head{display:none}
+  .prog-row{grid-template-columns:100px 1fr; gap:12px}
+  .prog-row .duration{grid-column:1 / -1; text-align:left}
+}
+
+/* ==== SPEAKERS ==== */
+.speakers-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:20px;
+}
+.spkr{
+  border:1px solid var(--rule);
+  background:#fff;
+  padding:28px;
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:24px;
+  align-items:start;
+}
+.spkr .photo{
+  width:120px; height:150px;
+  background:
+    repeating-linear-gradient(45deg, var(--bg-alt) 0 10px, #e4e9f0 10px 11px);
+  border:1px solid var(--rule);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  color:var(--ink-3);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  text-align:center;
+}
+.spkr .role{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:6px;
+}
+.spkr h4{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ink-3);
+  line-height:1.1;
+  font-style:italic;
+}
+.spkr .talk{
+  font-size:14px;
+  color:var(--ink-2);
+  margin-top:12px;
+  line-height:1.5;
+}
+.spkr .badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  background:var(--bg-alt);
+  color:var(--ink-3);
+  border:1px solid var(--rule);
+  margin-top:12px;
+}
+@media(max-width:760px){
+  .speakers-grid{grid-template-columns:1fr}
+  .spkr{grid-template-columns:80px 1fr; padding:20px; gap:16px}
+  .spkr .photo{width:80px; height:100px}
+}
+
+/* ==== COMMITTEE ==== */
+.cmm-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  border:1px solid var(--rule);
+  background:var(--rule);
+  gap:1px;
+}
+.person{
+  background:#fff;
+  padding:24px;
+  display:flex; flex-direction:column;
+}
+.person .photo{
+  aspect-ratio:4/5;
+  background:
+    repeating-linear-gradient(45deg, var(--bg-alt) 0 10px, #e4e9f0 10px 11px);
+  border:1px solid var(--rule);
+  margin-bottom:16px;
+  display:flex; align-items:flex-end; justify-content:center;
+  padding-bottom:10px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9.5px;
+  color:var(--ink-3);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.person .role{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.person .name{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ink);
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin-bottom:6px;
+}
+.person .aff{
+  font-size:13px;
+  color:var(--ink-2);
+  margin-bottom:12px;
+  font-style:italic;
+}
+.person .bio{
+  font-size:13px;
+  color:var(--ink-2);
+  line-height:1.55;
+  flex:1;
+}
+.person .contact{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--rule);
+  display:flex; flex-direction:column; gap:4px;
+}
+.person .contact a{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  color:var(--ieee);
+  text-decoration:none;
+  word-break:break-all;
+}
+.person .contact a:hover{text-decoration:underline}
+@media(max-width:900px){
+  .cmm-grid{grid-template-columns:1fr}
+}
+
+/* ==== TPC ==== */
+.tpc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+  border:1px solid var(--rule);
+  background:var(--rule);
+  gap:1px;
+}
+.tpc{
+  background:#fff;
+  padding:14px 18px;
+  display:flex; flex-direction:column; gap:2px;
+}
+.tpc .n{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:15px;
+  color:var(--ink);
+}
+.tpc .a{font-size:12px; color:var(--ink-3)}
+.tpc-note{
+  margin-top:20px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  color:var(--ink-3);
+}
+
+/* ==== SUBMIT ==== */
+.submit-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.submit-card{
+  border:1px solid var(--rule);
+  background:#fff;
+  padding:28px;
+}
+.submit-card h4{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.submit-card p{font-size:14px; color:var(--ink-2); margin-bottom:10px; line-height:1.55}
+.submit-card p strong{color:var(--ink); font-weight:600}
+.submit-card ul{list-style:none; padding:0; margin-top:16px}
+.submit-card ul li{
+  padding:10px 0;
+  border-bottom:1px solid var(--rule);
+  display:flex; justify-content:space-between; gap:12px;
+  font-size:13px;
+}
+.submit-card ul li:last-child{border-bottom:none}
+.submit-card ul li span:first-child{color:var(--ink-2); font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em; text-transform:uppercase}
+.submit-card ul li span:last-child{color:var(--ink); font-family:'IBM Plex Mono', monospace; font-size:12.5px}
+.submit-card ol{padding-left:20px; margin-top:8px}
+.submit-card ol li{font-size:14px; color:var(--ink-2); padding:4px 0}
+
+.edas-panel{
+  margin-top:20px;
+  background:var(--bg-dark);
+  color:#fff;
+  padding:20px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  flex-wrap:wrap;
+}
+.edas-panel .l{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; opacity:.6; margin-bottom:4px}
+.edas-panel .t{font-family:'IBM Plex Sans Condensed', sans-serif; font-weight:600; font-size:18px}
+@media(max-width:760px){
+  .submit-grid{grid-template-columns:1fr}
+}
+
+/* ==== VENUE ==== */
+.venue-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:24px;
+  border:1px solid var(--rule);
+  background:#fff;
+}
+.venue-map{
+  aspect-ratio:4/3;
+  background:var(--bg-alt);
+  position:relative;
+  border-right:1px solid var(--rule);
+  overflow:hidden;
+}
+.venue-map svg{position:absolute; inset:0; width:100%; height:100%}
+.venue-map .pin{
+  position:absolute;
+  left:62%; top:56%;
+  transform:translate(-50%, -100%);
+}
+.venue-map .pin .dot{
+  width:14px; height:14px; border-radius:50%;
+  background:var(--accent);
+  border:2px solid #fff;
+  box-shadow:0 0 0 6px rgba(230,126,0,0.25);
+}
+.venue-map .pin .lbl{
+  position:absolute; left:24px; top:-4px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  background:#fff;
+  padding:3px 8px;
+  border:1px solid var(--rule);
+  color:var(--ink);
+  white-space:nowrap;
+}
+.venue-map .tag{
+  position:absolute; top:12px; left:12px;
+  background:#fff;
+  border:1px solid var(--rule);
+}
+.venue-info{padding:28px}
+.venue-info .coords{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+  margin-bottom:10px;
+}
+.venue-info h4{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:32px;
+  color:var(--ink);
+  line-height:1.05;
+  margin-bottom:14px;
+  letter-spacing:-0.01em;
+}
+.venue-info p{font-size:14px; color:var(--ink-2); margin-bottom:12px; line-height:1.55}
+.venue-info .buttons{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap}
+@media(max-width:900px){
+  .venue-grid{grid-template-columns:1fr}
+  .venue-map{border-right:none; border-bottom:1px solid var(--rule)}
+}
+
+/* ==== CONTACT ==== */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  border:1px solid var(--rule);
+  background:var(--rule);
+  gap:1px;
+}
+.ccard{
+  background:#fff;
+  padding:24px;
+}
+.ccard .role{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.ccard .n{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:20px;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.ccard .aff{font-size:12px; color:var(--ink-3); margin-bottom:14px}
+.ccard a{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12.5px;
+  color:var(--ieee);
+  text-decoration:none;
+  display:inline-block;
+  border-bottom:1px solid currentColor;
+}
+.ccard a:hover{color:var(--ieee-2)}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr}
+}
+
+/* ==== FOOTER ==== */
+footer{
+  background:var(--bg-dark);
+  color:#cbd5e1;
+  padding:60px 24px 28px;
+}
+footer .f-inner{max-width:1360px; margin:0 auto}
+footer .f-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;
+  padding-bottom:32px;
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+footer h5{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#7f97b4;
+  margin-bottom:14px;
+}
+footer .lock{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:700;
+  font-size:28px;
+  color:#fff;
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin-bottom:14px;
+}
+footer .lock .accent{color:var(--accent)}
+footer p{font-size:13px; line-height:1.55}
+footer ul{list-style:none; padding:0}
+footer ul li{padding:4px 0}
+footer ul a{color:#cbd5e1; font-size:13px; text-decoration:none}
+footer ul a:hover{color:#fff}
+footer .f-bottom{
+  padding-top:20px;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:#7f97b4;
+}
+@media(max-width:760px){
+  footer .f-top{grid-template-columns:1fr}
+}
+
+/* ==== TWEAKS ==== */
+#tweaks{
+  position:fixed; bottom:20px; right:20px;
+  width:280px;
+  background:#fff;
+  border:1px solid var(--rule-strong);
+  padding:16px;
+  z-index:100;
+  display:none;
+  box-shadow:0 12px 32px rgba(0,0,0,0.15);
+  font-family:'IBM Plex Sans', sans-serif;
+}
+#tweaks.on{display:block}
+#tweaks h6{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+#tweaks .tw-group{margin-bottom:14px}
+#tweaks label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  display:block;
+  margin-bottom:6px;
+}
+#tweaks .opts{display:flex; gap:4px}
+#tweaks .opt{
+  flex:1;
+  padding:7px 8px;
+  border:1px solid var(--rule);
+  background:#fff;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  cursor:pointer;
+  color:var(--ink);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+#tweaks .opt.active{background:var(--ieee-2); color:#fff; border-color:var(--ieee-2)}
+
+/* scroll-spy active */
+.primary-nav a.active{background:var(--ieee); color:#fff}
+
+body[data-hero="clean"] #network-canvas{display:none}
+body[data-hero="grid"] #network-canvas{opacity:.35}
+body[data-hero="dense"] #network-canvas{opacity:1}
+</style>
+</head>
+<body data-hero="graph">
+
+<!-- ==== UTILITY STRIP ==== -->
+<div class="utility">
+  <div class="u-inner">
+    <span>IEEE NoF 2026 Workshop</span>
+    <span class="sep">│</span>
+    <span>Rome, Italy</span>
+    <span class="sep">│</span>
+    <span>29 Sep 2026</span>
+    <div class="right">
+      <span class="live"><span class="pulse"></span>SUBMISSIONS OPEN</span>
+      <a href="#submit">Submit →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==== MASTHEAD ==== -->
+<div class="masthead">
+  <div class="mast-inner">
+    <div class="logo-block">
+      <div class="logo-mark">ERN</div>
+      <div class="logo-text">
+        <div class="name">ERN 2026</div>
+        <div class="sub">Experimental Research on Networking · 1st Edition</div>
+      </div>
+    </div>
+    <div class="mast-right">
+      <a class="host-chip" href="https://nof.dnac.org/2026/" target="_blank" rel="noopener">
+        Held in conjunction with <strong>IEEE NoF 2026</strong>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ==== PRIMARY NAV ==== -->
+<nav class="primary-nav" id="main-nav">
+  <a href="#about"><span class="ix">01</span> Call for Papers</a>
+  <a href="#topics"><span class="ix">02</span> Topics</a>
+  <a href="#dates"><span class="ix">03</span> Dates</a>
+  <a href="#program"><span class="ix">04</span> Program</a>
+  <a href="#keynote"><span class="ix">05</span> Speakers</a>
+  <a href="#committee"><span class="ix">06</span> Committee</a>
+  <a href="#submit"><span class="ix">07</span> Author Guidelines</a>
+  <a href="#venue"><span class="ix">08</span> Venue</a>
+  <a href="#submit" class="cta">Submit paper →</a>
+</nav>
+
+<!-- ==== HERO ==== -->
+<section class="hero" id="top" style="border-top:none; padding:0">
+  <canvas id="network-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-labels">
+      <span class="tag ieee"><span class="dot"></span>IEEE NoF 2026 · Workshop Track</span>
+      <span class="tag"><span class="dot"></span>Half-day · Sept 29, 2026</span>
+      <span class="tag bright"><span class="dot"></span>Call for Papers Open</span>
+    </div>
+
+    <h1 class="hero-title">
+      Workshop on<br>Experimental Research on<br><span class="accent">Networking.</span>
+    </h1>
+    <p class="hero-sub">
+      A half-day IEEE NoF 2026 workshop for testbed-driven, reproducible, hardware-in-the-loop research across 5G/6G, O-RAN, optical, quantum and programmable networks.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#submit">Submit a paper <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="#about">Read the CFP</a>
+      <a class="btn btn-ghost" href="#program">View program</a>
+    </div>
+
+    <div class="hero-facts">
+      <div class="hf-row">
+        <span class="k">Workshop</span>
+        <span class="v"><em>29</em> Sep 2026<span class="mute">Rome, Italy</span></span>
+      </div>
+      <div class="hf-row">
+        <span class="k">Paper deadline</span>
+        <span class="v"><em>11</em> Jul 2026<span class="mute">AoE · via EDAS</span></span>
+      </div>
+      <div class="hf-row">
+        <span class="k">Format</span>
+        <span class="v">IEEE 2-col<span class="mute">6 pp · 10 pt</span></span>
+      </div>
+      <div class="hf-row">
+        <span class="k">Program</span>
+        <span class="v">6 papers<span class="mute">+ 2 invited + panel</span></span>
+      </div>
+      <div class="hf-row">
+        <span class="k">Proceedings</span>
+        <span class="v">IEEE Xplore<span class="mute">via NoF 2026</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== COUNTDOWN BAND ==== -->
+<div class="cd-band">
+  <div class="cd-inner">
+    <div class="cd-label">⚑ <strong>Paper submission</strong> closes in</div>
+    <div class="cd-units" id="countdown">
+      <div class="cd-unit"><div class="num" data-u="d">—</div><div class="u">Days</div></div>
+      <div class="cd-unit"><div class="num" data-u="h">—</div><div class="u">Hours</div></div>
+      <div class="cd-unit"><div class="num" data-u="m">—</div><div class="u">Min</div></div>
+      <div class="cd-unit"><div class="num" data-u="s">—</div><div class="u">Sec</div></div>
+    </div>
+    <div class="cd-target">TARGET: <strong>11 Jul 2026 · 23:59 AoE</strong></div>
+  </div>
+</div>
+
+<!-- ==== ABOUT ==== -->
+<section id="about">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 01</span><span class="sep">/</span><span>Call for Papers</span></div>
+      <div>
+        <h2>Closing the experimental validation gap.</h2>
+        <p>Most networking papers today rely on analytical models and simulation. ERN is the forum for results grounded in real hardware, real protocol stacks, and realistic testbed environments.</p>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p class="lead">
+          The networking research community has made tremendous strides in developing novel architectures, protocols, and management paradigms for next-generation communication networks. However, a large share of results presented at major venues are grounded in analytical modeling and simulation-based evaluations.
+        </p>
+        <p>While these methodologies are essential, the field faces a critical and growing <strong>reproducibility and experimental validation gap</strong>: research outcomes that have not been tested on real hardware, real protocol stacks, or realistic testbed environments risk remaining disconnected from practical deployment realities.</p>
+        <p><strong>ERN fills that gap.</strong> The Workshop on Experimental Research on Networking provides a dedicated forum for presenting experimental results, reproducible methodologies, prototyping efforts, and testbed-driven research at the networking layer and above. ERN specifically targets work that involves <em>real-world experimentation, hardware-in-the-loop validation, and end-to-end system prototyping</em>.</p>
+        <p>The program accommodates <strong>6 peer-reviewed papers</strong>, <strong>2 invited talks</strong>, and a <strong>panel discussion</strong> across two technical sessions — a focused ~3.5 hours designed for deep, technical exchange.</p>
+        <p>Accepted and presented papers will be published in the <strong>IEEE NoF 2026 Conference Proceedings</strong> and submitted to <strong>IEEE Xplore®</strong>, subject to IEEE quality review and the standard presentation / registration requirements of the host conference.</p>
+        <div class="scope-callout">
+          <span class="icon">→</span>
+          <div><strong>Note for authors —</strong> Authors interested in demonstrating a working system related to their workshop paper are encouraged to <em>also</em> submit to the NoF Demo track.</div>
+        </div>
+      </div>
+      <aside class="about-side">
+        <h4>Workshop at a glance</h4>
+        <ul>
+          <li><span>Edition</span><span>1st (inaugural)</span></li>
+          <li><span>Host conf.</span><span>IEEE NoF 2026</span></li>
+          <li><span>Date</span><span>29 Sep 2026</span></li>
+          <li><span>Duration</span><span>~3.5 hours</span></li>
+          <li><span>Papers</span><span>6 × 20 min</span></li>
+          <li><span>Invited</span><span>2 × 20 min</span></li>
+          <li><span>Review</span><span>Single-blind</span></li>
+          <li><span>Proceedings</span><span>IEEE Xplore via NoF</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ==== TOPICS ==== -->
+<section id="topics">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 02</span><span class="sep">/</span><span>Topics of Interest</span></div>
+      <div>
+        <h2>Research areas in scope.</h2>
+        <p>Original contributions involving real-world experimentation, testbeds, and prototyping. The list below is indicative, not exclusive — networking-layer experimental components required.</p>
+      </div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic"><span class="idx">T-01</span><h4>5G / 6G architectures</h4><p>Experimental evaluation of 5G / 6G network architectures and end-to-end protocol-stack validation.</p></div>
+      <div class="topic"><span class="idx">T-02</span><h4>O-RAN testbeds</h4><p>xApp / rApp development, RIC deployment, and performance benchmarking of Open RAN systems.</p></div>
+      <div class="topic"><span class="idx">T-03</span><h4>Optical networking</h4><p>SDM, multi-core fiber testbeds, and flex-grid experimental systems at the networking layer.</p></div>
+      <div class="topic"><span class="idx">T-04</span><h4>Quantum networks</h4><p>QKD testbeds, entanglement distribution, and quantum-network control-plane prototypes.</p></div>
+      <div class="topic"><span class="idx">T-05</span><h4>Satellite &amp; NTN</h4><p>Integration experiments and measurement campaigns for non-terrestrial network testbeds.</p></div>
+      <div class="topic"><span class="idx">T-06</span><h4>Orchestration &amp; slicing</h4><p>End-to-end experimental validation of network slicing across heterogeneous domains.</p></div>
+      <div class="topic"><span class="idx">T-07</span><h4>AI / ML for networking</h4><p>Reproducible experimental deployment of ML-driven network management and control.</p></div>
+      <div class="topic"><span class="idx">T-08</span><h4>Programmable networks</h4><p>P4-based, eBPF-based, and intent-based programmable platforms evaluated experimentally.</p></div>
+      <div class="topic"><span class="idx">T-09</span><h4>Edge &amp; fog computing</h4><p>Experimental evaluation of latency, reliability, and resource management at the edge.</p></div>
+      <div class="topic"><span class="idx">T-10</span><h4>Network security</h4><p>Intrusion and anomaly detection evaluated on real traffic and deployed systems.</p></div>
+      <div class="topic"><span class="idx">T-11</span><h4>Reproducibility</h4><p>Reproducible methodologies, open datasets, and benchmarking suites for networking research.</p></div>
+      <div class="topic"><span class="idx">T-12</span><h4>Adjacent areas</h4><p>Related topics with a networking-layer experimental component — get in touch if unsure.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== DATES ==== -->
+<section id="dates">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 03</span><span class="sep">/</span><span>Important Dates</span></div>
+      <div>
+        <h2>Timeline &amp; deadlines.</h2>
+        <p>All deadlines are anywhere-on-Earth (AoE) unless otherwise noted. Follow the workshop channels for any updates.</p>
+      </div>
+    </div>
+    <div class="dates-table">
+      <div class="dates-head">
+        <div>Date</div>
+        <div>Milestone</div>
+        <div>Status</div>
+        <div style="text-align:right">Zone</div>
+      </div>
+      <div class="date-row key">
+        <div class="when">2026-07-11</div>
+        <div class="what">Paper submission <span class="mute">— via EDAS</span></div>
+        <div class="status open">Open — submit now</div>
+        <div class="aoe">AoE</div>
+      </div>
+      <div class="date-row">
+        <div class="when">2026-08-15</div>
+        <div class="what">Acceptance notification</div>
+        <div class="status upcoming">Upcoming</div>
+        <div class="aoe">—</div>
+      </div>
+      <div class="date-row">
+        <div class="when">2026-08-25</div>
+        <div class="what">Camera-ready submission</div>
+        <div class="status upcoming">Upcoming</div>
+        <div class="aoe">AoE</div>
+      </div>
+      <div class="date-row key">
+        <div class="when">2026-09-29</div>
+        <div class="what">Workshop day <span class="mute">— Rome, Italy</span></div>
+        <div class="status upcoming">Upcoming</div>
+        <div class="aoe">CEST</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== PROGRAM ==== -->
+<section id="program">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 04</span><span class="sep">/</span><span>Tentative Program</span></div>
+      <div>
+        <h2>Half-day technical program.</h2>
+        <p>~3.5 hours · 2 technical sessions · 2 invited talks · 1 panel. Paper slots populate after the acceptance notification on Aug 15, 2026. Times are CEST (local, Rome).</p>
+      </div>
+    </div>
+    <div class="program-wrap">
+      <div class="program-head">
+        <div>Time (CEST)</div>
+        <div>Session / Item</div>
+        <div style="text-align:right">Duration</div>
+      </div>
+
+      <div class="prog-row">
+        <div class="time">09:00 — 09:10</div>
+        <div>
+          <div class="title">Opening remarks</div>
+          <div class="detail">Organizing committee · Welcome &amp; workshop overview</div>
+        </div>
+        <div class="duration">10 min</div>
+      </div>
+
+      <div class="prog-row keynote">
+        <div class="time">09:10 — 09:30</div>
+        <div>
+          <div class="title">Invited talk 1 — TBA <span class="track-badge">Invited</span></div>
+          <div class="detail">Speaker announcement forthcoming</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row keynote">
+        <div class="time">09:30 — 09:50</div>
+        <div>
+          <div class="title">Invited talk 2 — TBA <span class="track-badge">Invited</span></div>
+          <div class="detail">Speaker announcement forthcoming</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">09:50 — 10:50</div>
+        <div>
+          <div class="title">Technical Session 1 <span class="track-badge">3 papers</span></div>
+          <div class="detail">Accepted papers · speakers TBA after Aug 15, 2026</div>
+        </div>
+        <div class="duration">60 min</div>
+      </div>
+
+      <div class="prog-row break">
+        <div class="time">10:50 — 11:10</div>
+        <div>
+          <div class="title">Coffee break</div>
+          <div class="detail">—</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">11:10 — 12:10</div>
+        <div>
+          <div class="title">Technical Session 2 <span class="track-badge">3 papers</span></div>
+          <div class="detail">Accepted papers · speakers TBA after Aug 15, 2026</div>
+        </div>
+        <div class="duration">60 min</div>
+      </div>
+
+      <div class="prog-row">
+        <div class="time">12:10 — 12:25</div>
+        <div>
+          <div class="title">Panel / open discussion</div>
+          <div class="detail">Experimental networking — challenges &amp; road ahead</div>
+        </div>
+        <div class="duration">15 min</div>
+      </div>
+
+      <div class="prog-row">
+        <div class="time">12:25 — 12:30</div>
+        <div>
+          <div class="title">Closing remarks</div>
+          <div class="detail">Organizing committee</div>
+        </div>
+        <div class="duration">5 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== KEYNOTE ==== -->
+<section id="keynote">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 05</span><span class="sep">/</span><span>Invited Speakers</span></div>
+      <div>
+        <h2>Invited talks.</h2>
+        <p>ERN features two 20-minute invited talks from leading voices in experimental networking. Speakers will be announced here upon confirmation.</p>
+      </div>
+    </div>
+    <div class="speakers-grid">
+      <div class="spkr">
+        <div class="photo">Photo<br>TBA</div>
+        <div>
+          <div class="role">Invited Speaker · 01</div>
+          <h4>To be announced</h4>
+          <p class="talk">A 20-minute invited talk from a leading researcher in experimental networking. Formal invitations are being extended; the announcement will be published here.</p>
+          <span class="badge">● Awaiting confirmation</span>
+        </div>
+      </div>
+      <div class="spkr">
+        <div class="photo">Photo<br>TBA</div>
+        <div>
+          <div class="role">Invited Speaker · 02</div>
+          <h4>To be announced</h4>
+          <p class="talk">A second 20-minute invited talk complementing the first. Topics will cover testbed-driven research at the networking layer and above.</p>
+          <span class="badge">● Awaiting confirmation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== COMMITTEE ==== -->
+<section id="committee">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 06</span><span class="sep">/</span><span>Organizing Committee</span></div>
+      <div>
+        <h2>Workshop chairs.</h2>
+        <p>Three chairs with a joint track record in testbed-based and prototyping research across optical, mobile, and quantum networks.</p>
+      </div>
+    </div>
+    <div class="cmm-grid">
+      <div class="person">
+        <div class="photo">Photo placeholder</div>
+        <div class="role">Contact Chair</div>
+        <div class="name">Andrea Marotta</div>
+        <div class="aff">University of L'Aquila · Italy</div>
+        <p class="bio">Tenure-track researcher at DISIM; leads the Networks &amp; Services Laboratory (NSLAB). Works on optical networks, 5G/6G RAN design, O-RAN, SDN/NFV, cybersecurity, and QKD. Active in IEEE ComSoc conference organization.</p>
+        <div class="contact">
+          <a href="/cdn-cgi/l/email-protection#bddcd3d9cfd8dc93d0dccfd2c9c9dcfdc8d3d4cbdccc93d4c9"><span class="__cf_email__" data-cfemail="debfb0baacbbbff0b3bfacb1aaaabf9eabb0b7a8bfaff0b7aa">[email&#160;protected]</span></a>
+        </div>
+      </div>
+      <div class="person">
+        <div class="photo">Photo placeholder</div>
+        <div class="role">Co-Chair</div>
+        <div class="name">Koteswararao Kondepu</div>
+        <div class="aff">IIT Dharwad · India</div>
+        <p class="bio">Associate Professor &amp; Dean of R&amp;D at IIT Dharwad. Research spans 5G/6G, O-RAN, softwarization and virtualization of mobile networks, and optical access design. IEEE ComSoc Charles Kao Award, 2018.</p>
+        <div class="contact">
+          <a href="/cdn-cgi/l/email-protection#0863266367666c6d787d4861617c6c6026696b266166"><span class="__cf_email__" data-cfemail="f09bde9b9f9e94958085b09999849498de9193de999e">[email&#160;protected]</span></a>
+        </div>
+      </div>
+      <div class="person">
+        <div class="photo">Photo placeholder</div>
+        <div class="role">Co-Chair</div>
+        <div class="name">Riccardo Bassoli</div>
+        <div class="aff">TU Dresden · Germany</div>
+        <p class="bio">Junior Professor at the Deutsche Telekom Chair of Communication Networks; heads the Quantum Communication Networks (QCNets) group. PI in the 6G-life hub; member of CeTI, QIA, and the Hexa-X / Hexa-X II flagships.</p>
+        <div class="contact">
+          <a href="/cdn-cgi/l/email-protection#1c6e757f7f7d6e7873327e7d6f6f7370755c686931786e796f787972327879"><span class="__cf_email__" data-cfemail="fa889399999b889e95d4989b8989959693ba8e8fd79e889f899e9f94d49e9f">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TPC -->
+    <div style="height:48px"></div>
+    <div class="sec-head" style="border-bottom:none; padding-bottom:0; margin-bottom:20px">
+      <div class="meta"><span>§ 06.B</span><span class="sep">/</span><span>Technical Program Committee</span></div>
+      <div>
+        <h2 style="font-size:28px">TPC members (tentative).</h2>
+        <p>Additional members will be confirmed ahead of the review cycle.</p>
+      </div>
+    </div>
+    <div class="tpc-grid">
+      <div class="tpc"><div class="n">Sebastian Troia</div><div class="a">Politecnico di Milano, Italy</div></div>
+      <div class="tpc"><div class="n">Mëmëdhe Ibrahimi</div><div class="a">Politecnico di Milano, Italy</div></div>
+      <div class="tpc"><div class="n">Omran Ayoub</div><div class="a">SUPSI, Switzerland</div></div>
+      <div class="tpc"><div class="n">Alessio Sacco</div><div class="a">Politecnico di Torino, Italy</div></div>
+      <div class="tpc"><div class="n">Alex Piccioni</div><div class="a">University of L'Aquila, Italy</div></div>
+      <div class="tpc"><div class="n">Carlo Centofanti</div><div class="a">University of L'Aquila, Italy</div></div>
+      <div class="tpc"><div class="n">Xhulio Limani</div><div class="a">University of Antwerp, Belgium</div></div>
+      <div class="tpc"><div class="n">Mauro Tropea</div><div class="a">University of Calabria, Italy</div></div>
+      <div class="tpc"><div class="n">Mattia Giovanni Spina</div><div class="a">University of Calabria, Italy</div></div>
+      <div class="tpc"><div class="n">Luca Borgianni</div><div class="a">University of Pisa, Italy</div></div>
+      <div class="tpc"><div class="n">Venkateswarlu Gudepu</div><div class="a">University of Texas at Dallas, USA</div></div>
+      <div class="tpc"><div class="n">Bheemarjuna Reddy Tamma</div><div class="a">IIT Hyderabad, India</div></div>
+      <div class="tpc"><div class="n">Pol González Pacheco</div><div class="a">Universitat Politècnica de Catalunya (UPC), Spain</div></div>
+      <div class="tpc"><div class="n">Gianluca Davoli</div><div class="a">University of Bologna, Italy</div></div>
+      <div class="tpc"><div class="n">Rana Abu Bakar</div><div class="a">CNIT, Italy</div></div>
+      <div class="tpc"><div class="n">Margita Radovic</div><div class="a">Scuola Superiore Sant'Anna, Pisa, Italy</div></div>
+    </div>
+    <p class="tpc-note">→ TPC list as confirmed.</p>
+  </div>
+</section>
+
+<!-- ==== SUBMIT ==== -->
+<section id="submit">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 07</span><span class="sep">/</span><span>Author Guidelines</span></div>
+      <div>
+        <h2>Author guidelines.</h2>
+        <p>Standard IEEE conference format, submitted through EDAS. All submissions are single-blind peer-reviewed by TPC members.</p>
+      </div>
+    </div>
+    <div class="submit-grid">
+      <div class="submit-card">
+        <h4>Format &amp; preparation</h4>
+        <p>Papers must follow the standard IEEE conference template. Submissions should present original experimental results, reproducible methodologies, testbed designs, or prototyping efforts.</p>
+        <ul>
+          <li><span>Format</span><span>IEEE 2-column</span></li>
+          <li><span>Max length</span><span>6 pages</span></li>
+          <li><span>Font size</span><span>10 pt</span></li>
+          <li><span>Review type</span><span>Single-blind</span></li>
+          <li><span>Submission system</span><span>EDAS</span></li>
+          <li><span>Proceedings</span><span>IEEE Xplore via NoF</span></li>
+        </ul>
+      </div>
+      <div class="submit-card">
+        <h4>What makes a strong submission</h4>
+        <p>ERN welcomes contributions that validate ideas through real-world experimentation rather than simulation alone. Strong submissions typically include:</p>
+        <ol>
+          <li>A testbed description with clearly defined hardware &amp; software layers.</li>
+          <li>Reproducibility artifacts — open datasets, code, measurement traces.</li>
+          <li>End-to-end results at L2/L3 or above, not isolated link-level numbers.</li>
+          <li>A discussion of threats to validity and deployment implications.</li>
+        </ol>
+        <div class="edas-panel">
+          <div>
+            <div class="l">Submit via</div>
+            <div class="t">EDAS — submission system</div>
+          </div>
+          <a class="btn btn-primary" href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener">Open EDAS →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== VENUE ==== -->
+<section id="venue">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 08</span><span class="sep">/</span><span>Venue &amp; Travel</span></div>
+      <div>
+        <h2>Rome, Italy — at Universitas Mercatorum.</h2>
+        <p>ERN is co-located with IEEE NoF 2026 at the Spazio Mercatorum Educational Hub on Via Casilina. Travel and registration are coordinated through the main conference.</p>
+      </div>
+    </div>
+    <div class="venue-grid">
+      <div class="venue-map">
+        <span class="tag" style="position:absolute; top:12px; left:12px">41.9028° N · 12.4964° E</span>
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#d7dde6" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="400" height="300" fill="#f4f6f9"/>
+          <rect width="400" height="300" fill="url(#grid)"/>
+          <!-- river/coast stylized -->
+          <path d="M 0 200 Q 80 180 140 210 T 300 230 T 400 210" fill="none" stroke="#bfd7e8" stroke-width="10" opacity="0.5"/>
+          <path d="M 0 200 Q 80 180 140 210 T 300 230 T 400 210" fill="none" stroke="#00629b" stroke-width="1" opacity="0.3"/>
+          <!-- streets -->
+          <path d="M 50 0 L 50 300 M 120 0 L 120 300 M 200 0 L 200 300 M 280 0 L 280 300 M 350 0 L 350 300" stroke="#d7dde6" stroke-width="0.8"/>
+          <path d="M 0 60 L 400 60 M 0 120 L 400 120 M 0 180 L 400 180 M 0 240 L 400 240" stroke="#d7dde6" stroke-width="0.8"/>
+          <!-- landmarks -->
+          <circle cx="180" cy="140" r="22" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 3"/>
+          <text x="180" y="108" font-family="IBM Plex Mono, monospace" font-size="8" fill="#64748b" text-anchor="middle">COLOSSEUM</text>
+          <circle cx="80" cy="100" r="3" fill="#94a3b8"/>
+          <text x="80" y="90" font-family="IBM Plex Mono, monospace" font-size="7" fill="#64748b" text-anchor="middle">VATICAN</text>
+        </svg>
+        <div class="pin">
+        </div>
+      </div>
+      <div class="venue-info">
+        <div class="coords">41°53′N · 12°31′E · Rome</div>
+        <h4>Spazio Mercatorum<br>Educational Hub</h4>
+        <p><strong>Universitas Mercatorum</strong> — Spazio Mercatorum, Educational Hub<br>Via Casilina 110b, 00182 Roma, Italy</p>
+        <p>ERN is held on the workshop day of the 17th IEEE International Conference on Network of the Future (NoF 2026), 29 Sep – 2 Oct 2026. The main conference is organized by DNAC.</p>
+        <p><strong>Getting there:</strong> Metro C — <em>Lodi</em> (5 min walk) or <em>San Giovanni</em> (15 min walk); bus line 105.</p>
+        <div class="buttons">
+          <a class="btn btn-ieee" href="https://nof.dnac.org/2026/" target="_blank" rel="noopener">Visit NoF 2026 →</a>
+          <a class="btn btn-outline" href="https://nof.dnac.org/2026/venue/" target="_blank" rel="noopener">Venue &amp; travel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== CONTACT ==== -->
+<section id="contact">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="meta"><span>§ 09</span><span class="sep">/</span><span>Contact</span></div>
+      <div>
+        <h2>Get in touch.</h2>
+        <p>For questions on submission, program, or the workshop itself — reach the chairs directly.</p>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="ccard">
+        <div class="role">Contact Chair</div>
+        <div class="n">Andrea Marotta</div>
+        <div class="aff">University of L'Aquila · Italy</div>
+        <a href="/cdn-cgi/l/email-protection#12737c766077733c7f73607d66667352677c7b6473633c7b66"><span class="__cf_email__" data-cfemail="1f7e717b6d7a7e31727e6d706b6b7e5f6a7176697e6e31766b">[email&#160;protected]</span></a>
+      </div>
+      <div class="ccard">
+        <div class="role">Co-Chair</div>
+        <div class="n">Koteswararao Kondepu</div>
+        <div class="aff">IIT Dharwad · India</div>
+        <a href="/cdn-cgi/l/email-protection#02692c696d6c66677277426b6b76666a2c63612c6b6c"><span class="__cf_email__" data-cfemail="7f14511410111b1a0f0a3f16160b1b17511e1c511611">[email&#160;protected]</span></a>
+      </div>
+      <div class="ccard">
+        <div class="role">Co-Chair</div>
+        <div class="n">Riccardo Bassoli</div>
+        <div class="aff">TU Dresden · Germany</div>
+        <a href="/cdn-cgi/l/email-protection#d6a4bfb5b5b7a4b2b9f8b4b7a5a5b9babf96a2a3fbb2a4b3a5b2b3b8f8b2b3"><span class="__cf_email__" data-cfemail="97e5fef4f4f6e5f3f8b9f5f6e4e4f8fbfed7e3e2baf3e5f2e4f3f2f9b9f3f2">[email&#160;protected]</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==== FOOTER ==== -->
+<footer>
+  <div class="f-inner">
+    <div class="f-top">
+      <div>
+        <h5>ERN 2026</h5>
+        <div class="lock">Workshop on Experimental Research on <span class="accent">Networking</span></div>
+        <p>Rome, Italy · 29 September 2026 · In conjunction with IEEE NoF 2026.<br>An academic workshop dedicated to testbed-driven, reproducible networking research.</p>
+      </div>
+      <div>
+        <h5>Workshop</h5>
+        <ul>
+          <li><a href="#about">Call for Papers</a></li>
+          <li><a href="#topics">Topics</a></li>
+          <li><a href="#dates">Important dates</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#committee">Committee</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Submit</h5>
+        <ul>
+          <li><a href="#submit">Author guidelines</a></li>
+          <li><a href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener">EDAS ↗</a></li>
+          <li><a href="#">IEEE template ↗</a></li>
+          <li><a href="#">WikiCFP ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Elsewhere</h5>
+        <ul>
+          <li><a href="https://nof.dnac.org/2026/" target="_blank" rel="noopener">IEEE NoF 2026 ↗</a></li>
+          <li><a href="#">IEEE ComSoc ↗</a></li>
+          <li><a href="#contact">Email chairs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 ERN Workshop · Organizing Committee</span>
+      <span>IEEE NoF 2026 Workshop Track · Rome, Italy</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ==== TWEAKS (disabled) ==== -->
+
+<!-- ==== SCRIPTS ==== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/*EDITMODE-BEGIN*/
+const TWEAK_DEFAULTS = {
+  "hero": "graph"
+};
+/*EDITMODE-END*/
+
+// Countdown
+const deadline = new Date('2026-07-11T23:59:59Z').getTime();
+function tickCountdown(){
+  const now = Date.now();
+  let diff = Math.max(0, deadline - now);
+  const d = Math.floor(diff/86400000); diff -= d*86400000;
+  const h = Math.floor(diff/3600000);  diff -= h*3600000;
+  const m = Math.floor(diff/60000);    diff -= m*60000;
+  const s = Math.floor(diff/1000);
+  const el = document.getElementById('countdown');
+  el.querySelector('[data-u="d"]').textContent = String(d).padStart(3,'0');
+  el.querySelector('[data-u="h"]').textContent = String(h).padStart(2,'0');
+  el.querySelector('[data-u="m"]').textContent = String(m).padStart(2,'0');
+  el.querySelector('[data-u="s"]').textContent = String(s).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+// Network graph — IEEE blue tones on dark
+(function(){
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let W=0, H=0, dpr=Math.min(window.devicePixelRatio||1, 2);
+  let nodes=[];
+  function size(){
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = W*dpr; canvas.height = H*dpr;
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(dpr, dpr);
+  }
+  function makeNodes(){
+    const n = Math.max(40, Math.min(110, Math.round((W*H)/22000)));
+    nodes = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2,
+      r: Math.random()*1.4 + 0.6,
+      hub: Math.random() < 0.09,
+    }));
+  }
+  function resize(){ size(); makeNodes(); }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    const linkDist = 140;
+    ctx.lineWidth = 0.6;
+    for (let i=0;i<nodes.length;i++){
+      const a=nodes[i];
+      for (let j=i+1;j<nodes.length;j++){
+        const b=nodes[j];
+        const dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy;
+        if (d2 < linkDist*linkDist){
+          const t=1-Math.sqrt(d2)/linkDist;
+          const useAcc=(a.hub||b.hub)&&t>0.55;
+          ctx.strokeStyle = useAcc
+            ? `rgba(230,126,0,${t*0.42})`
+            : `rgba(120,170,220,${t*0.28})`;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for (const n of nodes){
+      n.x+=n.vx; n.y+=n.vy;
+      if (n.x<0||n.x>W) n.vx*=-1;
+      if (n.y<0||n.y>H) n.vy*=-1;
+      ctx.beginPath();
+      const r = n.hub ? n.r*2.2 : n.r;
+      ctx.arc(n.x,n.y,r,0,Math.PI*2);
+      ctx.fillStyle = n.hub ? 'rgba(230,126,0,0.85)' : 'rgba(180,210,235,0.55)';
+      ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// Scroll-spy
+(function(){
+  const sections=[...document.querySelectorAll('section[id]')];
+  const links=[...document.querySelectorAll('.primary-nav a[href^="#"]')];
+  const byId=Object.fromEntries(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(a=>a.classList.remove('active'));
+        const l=byId[e.target.id]; if(l && !l.classList.contains('cta')) l.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>io.observe(s));
+})();
+
+// Tweaks disabled
+</script>
+</body>
+</html>
