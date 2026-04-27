@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andreamarotta.github.io/ern-workshop/sitemap.xml
