@@ -832,6 +832,15 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
   color:var(--ink-3);
   letter-spacing:0.1em;
   text-transform:uppercase;
+  overflow:hidden;
+  position:relative;
+}
+.person .photo img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(0.92) contrast(1.02);
 }
 .person .role{
   font-family:'IBM Plex Mono', monospace;
@@ -1254,7 +1263,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       </div>
       <div class="hf-row">
         <span class="k">Program</span>
-        <span class="v">8 papers<span class="mute">+ 2 invited + best paper award</span></span>
+        <span class="v">8 papers<span class="mute">+ 2 invited talks</span></span>
       </div>
       <div class="hf-row">
         <span class="k">Proceedings</span>
@@ -1295,7 +1304,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         </p>
         <p>While these methodologies are essential, the field faces a critical and growing <strong>reproducibility and experimental validation gap</strong>: research outcomes that have not been tested on real hardware, real protocol stacks, or realistic testbed environments risk remaining disconnected from practical deployment realities.</p>
         <p><strong>ERN fills that gap.</strong> The Workshop on Experimental Research on Networking provides a dedicated forum for presenting experimental results, reproducible methodologies, prototyping efforts, and testbed-driven research at the networking layer and above. ERN specifically targets work that involves <em>real-world experimentation, hardware-in-the-loop validation, and end-to-end system prototyping</em>.</p>
-        <p>The program accommodates <strong>up to 8 peer-reviewed papers</strong>, <strong>2 invited talks</strong>, and the <strong>Best ERN Workshop Paper Award</strong> across two technical sessions — a focused ~3.5 hours designed for deep, technical exchange.</p>
+        <p>The program accommodates <strong>up to 8 peer-reviewed papers</strong> and <strong>2 invited talks</strong> across two technical sessions — a focused half-day designed for deep, technical exchange.</p>
         <p>Accepted and presented papers will be published in the <strong>NoF 2026 Conference Proceedings</strong> and submitted to <strong>IEEE Xplore®</strong>, subject to quality review and the standard presentation / registration requirements of the host conference.</p>
         <div class="scope-callout">
           <span class="icon">→</span>
@@ -1398,7 +1407,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       <div class="meta"><span>§ 04</span><span class="sep">/</span><span>Tentative Program</span></div>
       <div>
         <h2>Tentative half-day program.</h2>
-        <p>~3.5 hours · 2 technical sessions · 2 invited talks · Best Paper Award. Paper slots populate after the acceptance notification on Aug 15, 2026. Times are CEST (local, Rome). <em>Tentative — subject to change.</em></p>
+        <p>~3.25 hours · 2 technical sessions · 2 invited talks. Paper slots populate after the acceptance notification on Aug 15, 2026. Times are CEST (local, Rome). <em>Tentative — subject to change.</em></p>
       </div>
     </div>
     <div class="program-wrap">
@@ -1463,16 +1472,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       </div>
 
       <div class="prog-row">
-        <div class="time">12:10 — 12:25</div>
-        <div>
-          <div class="title">Best ERN Workshop Paper Award <span class="track-badge">Award</span></div>
-          <div class="detail">Recognition of the most outstanding contribution — selected by the TPC</div>
-        </div>
-        <div class="duration">15 min</div>
-      </div>
-
-      <div class="prog-row">
-        <div class="time">12:25 — 12:30</div>
+        <div class="time">12:10 — 12:15</div>
         <div>
           <div class="title">Closing remarks</div>
           <div class="detail">Organizing committee</div>
@@ -1528,33 +1528,33 @@ body[data-hero="dense"] #network-canvas{opacity:1}
     </div>
     <div class="cmm-grid">
       <div class="person">
-        <div class="photo">Photo placeholder</div>
+        <div class="photo"><img src="assets/photos/marotta.jpg" alt="Andrea Marotta" loading="lazy"></div>
         <div class="role">Chair</div>
         <div class="name">Andrea Marotta</div>
         <div class="aff">University of L'Aquila · Italy</div>
-        <p class="bio">Tenure-track researcher at DISIM; leads the Networks &amp; Services Laboratory (NSLAB). Works on optical networks, 5G/6G RAN design, O-RAN, SDN/NFV, cybersecurity, and QKD. Active in international networking research; inEE ComSoc conference organization.</p>
+        <p class="bio">Tenure-track researcher at DISIM; leads the Networks &amp; Services Laboratory (NSLAB). Works on optical networks, 5G/6G RAN design, O-RAN, SDN/NFV, cybersecurity, and QKD. Active in international networking research and conference organization.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#95f4fbf1e7f0f4bbf8f4e7fae1e1f4d5e0fbfce3f4e4bbfce1"><span class="__cf_email__" data-cfemail="64050a001601054a0905160b10100524110a0d1205154a0d10">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#e3828d87918682cd8e82918c979782a3968d8a958292cd8a97"><span class="__cf_email__" data-cfemail="89e8e7edfbece8a7e4e8fbe6fdfde8c9fce7e0ffe8f8a7e0fd">[email&#160;protected]</span></a>
         </div>
       </div>
       <div class="person">
-        <div class="photo">Photo placeholder</div>
+        <div class="photo"><img src="assets/photos/kondepu.jpeg" alt="Koteswararao Kondepu" loading="lazy"></div>
         <div class="role">Chair</div>
         <div class="name">Koteswararao Kondepu</div>
         <div class="aff">IIT Dharwad · India</div>
         <p class="bio">Associate Professor &amp; Dean of R&amp;D at IIT Dharwad. Research spans 5G/6G, O-RAN, softwarization and virtualization of mobile networks, and optical access design. Co-author of the Charles Kao Award, 2018.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#23480d484c4d47465356634a4a57474b0d42400d4a4d"><span class="__cf_email__" data-cfemail="e48fca8f8b8a80819491a48d8d90808cca8587ca8d8a">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#513a7f3a3e3f353421241138382535397f30327f383f"><span class="__cf_email__" data-cfemail="056e2b6e6a6b61607570456c6c71616d2b64662b6c6b">[email&#160;protected]</span></a>
         </div>
       </div>
       <div class="person">
-        <div class="photo">Photo placeholder</div>
+        <div class="photo"><img src="assets/photos/bassoli.png" alt="Riccardo Bassoli" loading="lazy"></div>
         <div class="role">Chair</div>
         <div class="name">Riccardo Bassoli</div>
         <div class="aff">TU Dresden · Germany</div>
         <p class="bio">Junior Professor at the Deutsche Telekom Chair of Communication Networks; heads the Quantum Communication Networks (QCNets) group. PI in the 6G-life hub; member of CeTI, QIA, and the Hexa-X / Hexa-X II flagships.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#f4869d97979586909bda969587879b989db48081d99086918790919ada9091"><span class="__cf_email__" data-cfemail="4f3d262c2c2e3d2b20612d2e3c3c2023260f3b3a622b3d2a3c2b2a21612b2a">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#90e2f9f3f3f1e2f4ffbef2f1e3e3fffcf9d0e4e5bdf4e2f5e3f4f5febef4f5"><span class="__cf_email__" data-cfemail="3e4c575d5d5f4c5a51105c5f4d4d5152577e4a4b135a4c5b4d5a5b50105a5b">[email&#160;protected]</span></a>
         </div>
       </div>
     </div>
@@ -1700,19 +1700,19 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div class="role">Chair</div>
         <div class="n">Andrea Marotta</div>
         <div class="aff">University of L'Aquila · Italy</div>
-        <a href="/cdn-cgi/l/email-protection#a3c2cdc7d1c6c28dcec2d1ccd7d7c2e3d6cdcad5c2d28dcad7"><span class="__cf_email__" data-cfemail="2849464c5a4d490645495a475c5c49685d46415e495906415c">[email&#160;protected]</span></a>
+        <a href="/cdn-cgi/l/email-protection#5e3f303a2c3b3f70333f2c312a2a3f1e2b3037283f2f70372a"><span class="__cf_email__" data-cfemail="e4858a80968185ca8985968b909085a4918a8d928595ca8d90">[email&#160;protected]</span></a>
       </div>
       <div class="ccard">
         <div class="role">Chair</div>
         <div class="n">Koteswararao Kondepu</div>
         <div class="aff">IIT Dharwad · India</div>
-        <a href="/cdn-cgi/l/email-protection#9bf0b5f0f4f5fffeebeedbf2f2effff3b5faf8b5f2f5"><span class="__cf_email__" data-cfemail="90fbbefbfffef4f5e0e5d0f9f9e4f4f8bef1f3bef9fe">[email&#160;protected]</span></a>
+        <a href="/cdn-cgi/l/email-protection#aac184c1c5c4cecfdadfeac3c3decec284cbc984c3c4"><span class="__cf_email__" data-cfemail="0c672267636268697c794c6565786864226d6f226562">[email&#160;protected]</span></a>
       </div>
       <div class="ccard">
         <div class="role">Chair</div>
         <div class="n">Riccardo Bassoli</div>
         <div class="aff">TU Dresden · Germany</div>
-        <a href="/cdn-cgi/l/email-protection#a1d3c8c2c2c0d3c5ce8fc3c0d2d2cecdc8e1d5d48cc5d3c4d2c5c4cf8fc5c4"><span class="__cf_email__" data-cfemail="6d1f040e0e0c1f0902430f0c1e1e0201042d191840091f081e090803430908">[email&#160;protected]</span></a>
+        <a href="/cdn-cgi/l/email-protection#196b707a7a786b7d76377b786a6a767570596d6c347d6b7c6a7d7c77377d7c"><span class="__cf_email__" data-cfemail="3c4e555f5f5d4e5853125e5d4f4f5350557c484911584e594f585952125859">[email&#160;protected]</span></a>
       </div>
     </div>
   </div>
