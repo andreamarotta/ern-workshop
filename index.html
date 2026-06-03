@@ -1539,7 +1539,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div class="aff">University of L'Aquila · Italy</div>
         <p class="bio">Tenure-track researcher at DISIM; leads the Networks &amp; Services Laboratory (NSLAB). Works on optical networks, 5G/6G RAN design, O-RAN, SDN/NFV, cybersecurity, and QKD. Active in international networking research and conference organization.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#1d7c73796f787c33707c6f7269697c5d6873746b7c6c337469"><span class="__cf_email__" data-cfemail="d0b1beb4a2b5b1febdb1a2bfa4a4b190a5beb9a6b1a1feb9a4">[email&#160;protected]</span></a>
+          <a class="eml" data-u="andrea.marotta" data-d="univaq.it" href="#">[ enable JavaScript for email ]</a>
         </div>
       </div>
       <div class="person">
@@ -1549,7 +1549,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div class="aff">IIT Dharwad · India</div>
         <p class="bio">Associate Professor &amp; Dean of R&amp;D at IIT Dharwad. Research spans 5G/6G, O-RAN, softwarization and virtualization of mobile networks, and optical access design. Co-author of the Charles Kao Award, 2018.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#bfd491d4d0d1dbdacfcaffd6d6cbdbd791dedc91d6d1"><span class="__cf_email__" data-cfemail="f69dd89d999892938683b69f9f82929ed89795d89f98">[email&#160;protected]</span></a>
+          <a class="eml" data-u="k.kondepu" data-d="iitdh.ac.in" href="#">[ enable JavaScript for email ]</a>
         </div>
       </div>
       <div class="person">
@@ -1559,7 +1559,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div class="aff">TU Dresden · Germany</div>
         <p class="bio">Junior Professor at the Deutsche Telekom Chair of Communication Networks; heads the Quantum Communication Networks (QCNets) group. PI in the 6G-life hub; member of CeTI, QIA, and the Hexa-X / Hexa-X II flagships.</p>
         <div class="contact">
-          <a href="/cdn-cgi/l/email-protection#9ae8f3f9f9fbe8fef5b4f8fbe9e9f5f6f3daeeefb7fee8ffe9fefff4b4feff"><span class="__cf_email__" data-cfemail="cebca7adadafbcaaa1e0acafbdbda1a2a78ebabbe3aabcabbdaaaba0e0aaab">[email&#160;protected]</span></a>
+          <a class="eml" data-u="riccardo.bassoli" data-d="tu-dresden.de" href="#">[ enable JavaScript for email ]</a>
         </div>
       </div>
     </div>
@@ -1705,19 +1705,19 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div class="role">Chair</div>
         <div class="n">Andrea Marotta</div>
         <div class="aff">University of L'Aquila · Italy</div>
-        <a href="/cdn-cgi/l/email-protection#23424d475146420d4e42514c57574263564d4a5542520d4a57"><span class="__cf_email__" data-cfemail="f3929d97819692dd9e92819c878792b3869d9a859282dd9a87">[email&#160;protected]</span></a>
+        <a class="eml" data-u="andrea.marotta" data-d="univaq.it" href="#">[ enable JavaScript for email ]</a>
       </div>
       <div class="ccard">
         <div class="role">Chair</div>
         <div class="n">Koteswararao Kondepu</div>
         <div class="aff">IIT Dharwad · India</div>
-        <a href="/cdn-cgi/l/email-protection#4d266326222329283d380d2424392925632c2e632423"><span class="__cf_email__" data-cfemail="aac184c1c5c4cecfdadfeac3c3decec284cbc984c3c4">[email&#160;protected]</span></a>
+        <a class="eml" data-u="k.kondepu" data-d="iitdh.ac.in" href="#">[ enable JavaScript for email ]</a>
       </div>
       <div class="ccard">
         <div class="role">Chair</div>
         <div class="n">Riccardo Bassoli</div>
         <div class="aff">TU Dresden · Germany</div>
-        <a href="/cdn-cgi/l/email-protection#0c7e656f6f6d7e6863226e6d7f7f6360654c787921687e697f686962226869"><span class="__cf_email__" data-cfemail="196b707a7a786b7d76377b786a6a767570596d6c347d6b7c6a7d7c77377d7c">[email&#160;protected]</span></a>
+        <a class="eml" data-u="riccardo.bassoli" data-d="tu-dresden.de" href="#">[ enable JavaScript for email ]</a>
       </div>
     </div>
   </div>
@@ -1770,7 +1770,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 <!-- ==== TWEAKS (disabled) ==== -->
 
 <!-- ==== SCRIPTS ==== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /*EDITMODE-BEGIN*/
 const TWEAK_DEFAULTS = {
   "hero": "graph"
@@ -1872,6 +1872,17 @@ setInterval(tickCountdown, 1000);
 })();
 
 // Tweaks disabled
+</script>
+<script>
+// Obfuscation-proof email rebuild — assembles addresses client-side so no
+// plaintext "mailto:" or user@domain string exists in the static HTML.
+(function(){
+  document.querySelectorAll('a.eml').forEach(function(a){
+    var e = a.getAttribute('data-u') + String.fromCharCode(64) + a.getAttribute('data-d');
+    a.setAttribute('href', 'mailto:' + e);
+    a.textContent = e;
+  });
+})();
 </script>
 </body>
 </html>
