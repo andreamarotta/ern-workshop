@@ -765,6 +765,16 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
   letter-spacing:0.08em;
   text-transform:uppercase;
   text-align:center;
+  overflow:hidden;
+  position:relative;
+  flex-shrink:0;
+}
+.spkr .photo img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(0.95) contrast(1.02);
 }
 .spkr .role{
   font-family:'IBM Plex Mono', monospace;
@@ -781,6 +791,25 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
   color:var(--ink-3);
   line-height:1.1;
   font-style:italic;
+}
+.spkr.confirmed h4{
+  color:var(--ink);
+  font-style:normal;
+}
+.spkr .aff{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11.5px;
+  letter-spacing:0.04em;
+  color:var(--ink-3);
+  margin-top:4px;
+}
+.spkr .talktitle{
+  font-family:'IBM Plex Sans Condensed', sans-serif;
+  font-weight:600;
+  font-size:16px;
+  color:var(--accent);
+  line-height:1.25;
+  margin-top:14px;
 }
 .spkr .talk{
   font-size:14px;
@@ -1434,8 +1463,8 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       <div class="prog-row keynote">
         <div class="time">09:10 — 09:30</div>
         <div>
-          <div class="title">Invited talk 1 — TBA <span class="track-badge">Invited</span></div>
-          <div class="detail">Speaker announcement forthcoming</div>
+          <div class="title">Invited talk 1 — Prof. Luca Valcarenghi <span class="track-badge">Invited</span></div>
+          <div class="detail">Next Generation Mobile Network Experiments · Scuola Superiore Sant'Anna</div>
         </div>
         <div class="duration">20 min</div>
       </div>
@@ -1499,13 +1528,14 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       </div>
     </div>
     <div class="speakers-grid">
-      <div class="spkr">
-        <div class="photo">Photo<br>TBA</div>
+      <div class="spkr confirmed">
+        <div class="photo"><img src="assets/photos/valcarenghi.jpg" alt="Prof. Luca Valcarenghi" loading="lazy"></div>
         <div>
           <div class="role">Invited Speaker · 01</div>
-          <h4>To be announced</h4>
-          <p class="talk">A 20-minute invited talk from a leading researcher in experimental networking. Formal invitations are being extended; the announcement will be published here.</p>
-          <span class="badge">● Awaiting confirmation</span>
+          <h4>Prof. Luca Valcarenghi</h4>
+          <div class="aff">Scuola Superiore Sant'Anna, Pisa · Italy</div>
+          <p class="talktitle">“Next Generation Mobile Network Experiments: closing the gap between research and deployment”</p>
+          <span class="badge" style="border-color:var(--accent); color:var(--accent)">● Confirmed</span>
         </div>
       </div>
       <div class="spkr">
