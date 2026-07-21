@@ -741,17 +741,16 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
 /* ==== SPEAKERS ==== */
 .speakers-grid{
   display:grid;
-  grid-template-columns:1fr;
-  max-width:640px;
+  grid-template-columns:repeat(3, 1fr);
   gap:20px;
 }
 .spkr{
   border:1px solid var(--rule);
   background:#fff;
   padding:28px;
-  display:grid;
-  grid-template-columns:120px 1fr;
-  gap:24px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
   align-items:start;
 }
 .spkr .photo{
@@ -1513,21 +1512,39 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 <section id="keynote">
   <div class="sec-inner">
     <div class="sec-head">
-      <div class="meta"><span>§ 05</span><span class="sep">/</span><span>Keynote</span></div>
+      <div class="meta"><span>§ 05</span><span class="sep">/</span><span>Keynotes</span></div>
       <div>
-        <h2>Keynote.</h2>
-        <p>ERN features a 20-minute keynote from a leading voice in experimental networking.</p>
+        <h2>Keynotes.</h2>
+        <p>ERN features keynotes from leading voices in experimental networking. Additional keynotes will be announced here upon confirmation.</p>
       </div>
     </div>
     <div class="speakers-grid">
       <div class="spkr confirmed">
         <div class="photo"><img src="assets/photos/valcarenghi.jpg" alt="Prof. Luca Valcarenghi" loading="lazy"></div>
         <div>
-          <div class="role">Keynote</div>
+          <div class="role">Keynote · 01</div>
           <h4>Prof. Luca Valcarenghi</h4>
           <div class="aff">Scuola Superiore Sant'Anna, Pisa · Italy</div>
           <p class="talktitle">“Next Generation Mobile Network Experiments: closing the gap between research and deployment”</p>
           <span class="badge" style="border-color:var(--accent); color:var(--accent)">● Confirmed</span>
+        </div>
+      </div>
+      <div class="spkr">
+        <div class="photo">Photo<br>TBA</div>
+        <div>
+          <div class="role">Keynote · 02</div>
+          <h4>To be announced</h4>
+          <p class="talk">A second keynote from a leading voice in experimental networking. Announcement forthcoming.</p>
+          <span class="badge">● Awaiting confirmation</span>
+        </div>
+      </div>
+      <div class="spkr">
+        <div class="photo">Photo<br>TBA</div>
+        <div>
+          <div class="role">Keynote · 03</div>
+          <h4>To be announced</h4>
+          <p class="talk">A third keynote from a leading voice in experimental networking. Announcement forthcoming.</p>
+          <span class="badge">● Awaiting confirmation</span>
         </div>
       </div>
     </div>
