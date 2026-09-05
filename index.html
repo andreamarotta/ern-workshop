@@ -33,9 +33,9 @@
   "@type": "Event",
   "name": "1st Workshop on Experimental Research on Networking (ERN 2026)",
   "alternateName": "ERN 2026",
-  "description": "A half-day workshop, in conjunction with NoF 2026, providing a dedicated forum for experimental results, reproducible methodologies, prototyping efforts, and testbed-driven research at the networking layer and above.",
-  "startDate": "2026-09-29T09:00:00+02:00",
-  "endDate": "2026-09-29T12:30:00+02:00",
+  "description": "A full-day workshop, in conjunction with NoF 2026, providing a dedicated forum for experimental results, reproducible methodologies, prototyping efforts, and testbed-driven research at the networking layer and above. 10 peer-reviewed papers across 4 technical sessions plus 3 invited talks.",
+  "startDate": "2026-09-29T08:30:00+02:00",
+  "endDate": "2026-09-29T17:00:00+02:00",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "url": "https://andreamarotta.github.io/ern-workshop/",
@@ -720,6 +720,19 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
 .prog-row.session .title{color:var(--ieee)}
 .prog-row.break{background:#f8fafc}
 .prog-row.break .title{color:var(--ink-3); font-weight:500}
+.prog-row.paper{background:#fff; padding-left:44px}
+.prog-row.paper .time{color:var(--ink-3); font-size:12px}
+.prog-row.paper .title{
+  font-family:'IBM Plex Sans', sans-serif;
+  font-size:14.5px; font-weight:500; color:var(--ink-2);
+  line-height:1.4;
+}
+.prog-row.paper .detail{font-size:11.5px; margin-top:4px}
+.prog-row.paper .edas{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px; letter-spacing:0.04em;
+  color:var(--ink-3);
+}
 .track-badge{
   display:inline-block;
   font-family:'IBM Plex Mono', monospace;
@@ -735,6 +748,7 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
 @media(max-width:760px){
   .program-head{display:none}
   .prog-row{grid-template-columns:100px 1fr; gap:12px}
+  .prog-row.paper{padding-left:20px}
   .prog-row .duration{grid-column:1 / -1; text-align:left}
 }
 
@@ -1012,33 +1026,27 @@ section{padding:72px 24px; border-bottom:1px solid var(--rule)}
   border-right:1px solid var(--rule);
   overflow:hidden;
 }
-.venue-map svg{position:absolute; inset:0; width:100%; height:100%}
-.venue-map .pin{
-  position:absolute;
-  left:62%; top:56%;
-  transform:translate(-50%, -100%);
-}
-.venue-map .pin .dot{
-  width:14px; height:14px; border-radius:50%;
-  background:var(--accent);
-  border:2px solid #fff;
-  box-shadow:0 0 0 6px rgba(230,126,0,0.25);
-}
-.venue-map .pin .lbl{
-  position:absolute; left:24px; top:-4px;
-  font-family:'IBM Plex Mono', monospace;
-  font-size:11px;
-  background:#fff;
-  padding:3px 8px;
-  border:1px solid var(--rule);
-  color:var(--ink);
-  white-space:nowrap;
-}
+.venue-map iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
 .venue-map .tag{
   position:absolute; top:12px; left:12px;
   background:#fff;
   border:1px solid var(--rule);
+  padding:5px 9px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px; letter-spacing:0.04em;
+  color:var(--ink-2);
+  z-index:2;
 }
+.venue-map .maplink{
+  position:absolute; bottom:12px; right:12px;
+  background:var(--ink); color:#fff;
+  padding:6px 11px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px; letter-spacing:0.06em;
+  text-decoration:none;
+  z-index:2;
+}
+.venue-map .maplink:hover{background:var(--accent)}
 .venue-info{padding:28px}
 .venue-info .coords{
   font-family:'IBM Plex Mono', monospace;
@@ -1252,7 +1260,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
   <a href="#topics"><span class="ix">02</span> Topics</a>
   <a href="#dates"><span class="ix">03</span> Dates</a>
   <a href="#program"><span class="ix">04</span> Program</a>
-  <a href="#keynote"><span class="ix">05</span> Speakers</a>
+  <a href="#keynote"><span class="ix">05</span> Invited Talks</a>
   <a href="#committee"><span class="ix">06</span> Committee</a>
   <a href="#submit"><span class="ix">07</span> Author Guidelines</a>
   <a href="#venue"><span class="ix">08</span> Venue</a>
@@ -1266,7 +1274,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
   <div class="hero-inner">
     <div class="hero-labels">
       <span class="tag ieee"><span class="dot"></span>NoF 2026 · Workshop Track</span>
-      <span class="tag"><span class="dot"></span>Half-day · Sept 29, 2026</span>
+      <span class="tag"><span class="dot"></span>Full-day · Sept 29, 2026</span>
       <span class="tag bright"><span class="dot"></span>Call for Papers Open</span>
     </div>
 
@@ -1274,7 +1282,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       Workshop on<br>Experimental Research on<br><span class="accent">Networking.</span>
     </h1>
     <p class="hero-sub">
-      A half-day NoF 2026 workshop for testbed-driven, reproducible, hardware-in-the-loop research across 5G/6G, O-RAN, optical, quantum and programmable networks.
+      A full-day NoF 2026 workshop for testbed-driven, reproducible, hardware-in-the-loop research across 5G/6G, O-RAN, optical, quantum and programmable networks.
     </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#submit">Submit a paper <span class="arrow">→</span></a>
@@ -1297,7 +1305,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       </div>
       <div class="hf-row">
         <span class="k">Program</span>
-        <span class="v">Peer-reviewed<span class="mute">+ keynote</span></span>
+        <span class="v">10 papers<span class="mute">+ 3 invited talks</span></span>
       </div>
       <div class="hf-row">
         <span class="k">Proceedings</span>
@@ -1338,7 +1346,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         </p>
         <p>While these methodologies are essential, the field faces a critical and growing <strong>reproducibility and experimental validation gap</strong>: research outcomes that have not been tested on real hardware, real protocol stacks, or realistic testbed environments risk remaining disconnected from practical deployment realities.</p>
         <p><strong>ERN fills that gap.</strong> The Workshop on Experimental Research on Networking provides a dedicated forum for presenting experimental results, reproducible methodologies, prototyping efforts, and testbed-driven research at the networking layer and above. ERN specifically targets work that involves <em>real-world experimentation, hardware-in-the-loop validation, and end-to-end system prototyping</em>.</p>
-        <p>The program accommodates <strong>up to 8 peer-reviewed papers</strong> and an <strong>invited keynote</strong> across two technical sessions — a focused half-day designed for deep, technical exchange.</p>
+        <p>Following a strong response to the call for papers, ERN 2026 runs as a <strong>full-day workshop</strong>: <strong>10 peer-reviewed papers</strong> across <strong>four technical sessions</strong>, plus <strong>three invited talks</strong>.</p>
         <p>Accepted and presented papers will be published in the <strong>NoF 2026 Conference Proceedings</strong> and submitted to <strong>IEEE Xplore®</strong>, subject to quality review and the standard presentation / registration requirements of the host conference.</p>
         <div class="scope-callout">
           <span class="icon">→</span>
@@ -1351,9 +1359,9 @@ body[data-hero="dense"] #network-canvas{opacity:1}
           <li><span>Edition</span><span>1st (inaugural)</span></li>
           <li><span>Host conf.</span><span>NoF 2026</span></li>
           <li><span>Date</span><span>29 Sep 2026</span></li>
-          <li><span>Duration</span><span>~3.5 hours</span></li>
-          <li><span>Papers</span><span>up to 8 × 15 min</span></li>
-          <li><span>Keynote</span><span>1 × 20 min</span></li>
+          <li><span>Duration</span><span>Full day · 08:30–17:00</span></li>
+          <li><span>Papers</span><span>10 × 20 min</span></li>
+          <li><span>Invited talks</span><span>3 × 40 min</span></li>
           <li><span>Review</span><span>Single-blind</span></li>
           <li><span>Proceedings</span><span>IEEE Xplore via NoF</span></li>
         </ul>
@@ -1438,10 +1446,10 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 <section id="program">
   <div class="sec-inner">
     <div class="sec-head">
-      <div class="meta"><span>§ 04</span><span class="sep">/</span><span>Tentative Program</span></div>
+      <div class="meta"><span>§ 04</span><span class="sep">/</span><span>Program</span></div>
       <div>
-        <h2>Tentative half-day program.</h2>
-        <p>~3 hours · 2 technical sessions · 1 keynote. Paper slots populate after the acceptance notification on Aug 15, 2026. Times are CEST (local, Rome). <em><strong>Tentative — the program may be expanded depending on the number of accepted submissions.</strong></em></p>
+        <h2>Full-day technical program.</h2>
+        <p>08:30–17:00 · 4 technical sessions · 10 peer-reviewed papers · 3 invited talks. Times are CEST (local, Rome), aligned to the NoF 2026 conference slots. Regular papers: 20 min (17 min presentation + 3 min Q&amp;A). Invited talks: 40 min.</p>
       </div>
     </div>
     <div class="program-wrap">
@@ -1451,60 +1459,210 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <div style="text-align:right">Duration</div>
       </div>
 
+      <div class="prog-row break">
+        <div class="time">08:30 — 09:00</div>
+        <div>
+          <div class="title">Registration</div>
+          <div class="detail">—</div>
+        </div>
+        <div class="duration">30 min</div>
+      </div>
+
       <div class="prog-row">
         <div class="time">09:00 — 09:10</div>
         <div>
           <div class="title">Opening remarks</div>
-          <div class="detail">Organizing committee · Welcome &amp; workshop overview</div>
+          <div class="detail">Workshop introduction · Workshop Co-Chairs</div>
         </div>
         <div class="duration">10 min</div>
       </div>
 
       <div class="prog-row keynote">
-        <div class="time">09:10 — 09:30</div>
+        <div class="time">09:10 — 09:50</div>
         <div>
-          <div class="title">Keynote — Prof. Luca Valcarenghi <span class="track-badge">Keynote</span></div>
-          <div class="detail">Next Generation Mobile Network Experiments · Scuola Superiore Sant'Anna</div>
+          <div class="title">Invited talk 1 — Prof. Luca Valcarenghi <span class="track-badge">Invited</span></div>
+          <div class="detail">Next-Generation Mobile Network Experiments: The Potential of Coordinating Federated Learning and RAN Transport · Scuola Superiore Sant’Anna, Italy</div>
+        </div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">09:50 — 10:30</div>
+        <div>
+          <div class="title">Technical Session 1 — Mobile Network Measurements and 5G QoS <span class="track-badge">2 papers</span></div>
+        </div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">09:50 — 10:10</div>
+        <div>
+          <div class="title">A Journey in Smartphone-Based Network Measurements: from Performance Analysis to Machine Learning-Driven Optimization</div>
+          <div class="detail">Stefania Zinno, Giovanni Stanco, Giuseppe Caso, Nicola Pasquino, Alessio Botta, Anna Brunstrom, Giorgio Ventre · University of Naples Federico II, Italy; Karlstad University, Sweden</div>
         </div>
         <div class="duration">20 min</div>
       </div>
 
-      <div class="prog-row session">
-        <div class="time">09:30 — 10:30</div>
+      <div class="prog-row paper">
+        <div class="time">10:10 — 10:30</div>
         <div>
-          <div class="title">Technical Session 1 <span class="track-badge">4 papers · 15 min each</span></div>
-          <div class="detail">Accepted papers · speakers TBA after Aug 15, 2026</div>
+          <div class="title">Implementation of Hybrid QoS-Aware Data Radio Bearer in 5G Networks</div>
+          <div class="detail">Padmapriya Patil, Abhishek Bhattacharyya, Gudepu Venkateswarlu, Andrea Fumagalli, Koteswararao Kondepu · University of Texas at Dallas, USA; IIT Dharwad, India</div>
         </div>
-        <div class="duration">60 min</div>
+        <div class="duration">20 min</div>
       </div>
 
       <div class="prog-row break">
-        <div class="time">10:30 — 10:50</div>
+        <div class="time">10:30 — 11:00</div>
         <div>
-          <div class="title">Coffee break</div>
+          <div class="title">Morning coffee break</div>
           <div class="detail">—</div>
+        </div>
+        <div class="duration">30 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">11:00 — 12:20</div>
+        <div>
+          <div class="title">Technical Session 2 — Measurements, Programmable and Emulated Network Testbeds <span class="track-badge">4 papers</span></div>
+        </div>
+        <div class="duration">80 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">11:00 — 11:20</div>
+        <div>
+          <div class="title">iCloud Private Relay on Mobile Networks: Performance Across Countries and Roaming</div>
+          <div class="detail">Damiano Ravalico, Martino Trevisan, Idilio Drago, Paul Schmitt, Francesco Bronzino · University of Trieste, Italy; University of Turin, Italy; Cal Poly, USA; ENS de Lyon, France</div>
         </div>
         <div class="duration">20 min</div>
       </div>
 
-      <div class="prog-row session">
-        <div class="time">10:50 — 11:50</div>
+      <div class="prog-row paper">
+        <div class="time">11:20 — 11:40</div>
         <div>
-          <div class="title">Technical Session 2 <span class="track-badge">4 papers · 15 min each</span></div>
-          <div class="detail">Accepted papers · speakers TBA after Aug 15, 2026</div>
+          <div class="title">An Experimental Hybrid SDN Platform Integrating Emulated and Hardware Switches</div>
+          <div class="detail">Cristian Bua, Antonio Masu, Lorenzo Bianchi, Sara Menchini, Asm Chafiullah Bhuiyan, Stefano Giordano, Alessio Giorgetti · University of Pisa, Italy</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">11:40 — 12:00</div>
+        <div>
+          <div class="title">Experimental Evaluation of a P4-Based Networking Framework for the Automatic Discovery and Dynamic Formation of Smart-Device Swarms</div>
+          <div class="detail">Faris Alhamed, Francesco Paolucci, Filippo Cugini · CNIT, Italy</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">12:00 — 12:20</div>
+        <div>
+          <div class="title">Emulation Is Not Neutral: How EVE-NG and Containerlab Shape Network Experiments</div>
+          <div class="detail">Luca Borgianni, Pavan Sai Bhogadi, Davide Adami, Stefano Giordano · University of Pisa, Italy; CNIT Pisa Research Unit, Italy</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row break">
+        <div class="time">12:30 — 13:30</div>
+        <div>
+          <div class="title">Lunch break</div>
+          <div class="detail">—</div>
         </div>
         <div class="duration">60 min</div>
       </div>
 
-      <div class="prog-row">
-        <div class="time">11:50 — 11:55</div>
+      <div class="prog-row keynote">
+        <div class="time">13:30 — 14:10</div>
         <div>
-          <div class="title">Closing remarks</div>
-          <div class="detail">Organizing committee</div>
+          <div class="title">Invited talk 2 — Luigi Briguglio <span class="track-badge">Invited</span></div>
+          <div class="detail">Title to be confirmed — SUSTAIN-6G · CyberEthics Lab., Italy</div>
         </div>
-        <div class="duration">5 min</div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">14:10 — 14:50</div>
+        <div>
+          <div class="title">Technical Session 3 — Experimental Network Security <span class="track-badge">2 papers</span></div>
+        </div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">14:10 — 14:30</div>
+        <div>
+          <div class="title">A Testbed for Runtime Behavioral Analysis of eSIM Applets</div>
+          <div class="detail">Matteo Fanfarillo, Lorenzo Valeriani, Leandro Pagano, Giuseppe Bianchi · University of Rome Tor Vergata, Italy; CNIT, Italy; Sapienza University of Rome, Italy</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">14:30 — 14:50</div>
+        <div>
+          <div class="title">Experimental Evaluation of an Explainable Hybrid AI Framework for Cyber Threat and Hardware Failure Detection in SD-WAN</div>
+          <div class="detail">Amirreza Fazelyhamedani, Philipp Wieder, Ramin Yahyapour · GWDG, Germany; University of Göttingen, Germany</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row break">
+        <div class="time">15:00 — 15:30</div>
+        <div>
+          <div class="title">Afternoon coffee break</div>
+          <div class="detail">—</div>
+        </div>
+        <div class="duration">30 min</div>
+      </div>
+
+      <div class="prog-row keynote">
+        <div class="time">15:30 — 16:10</div>
+        <div>
+          <div class="title">Invited talk 3 — Dr. Emilio Calvanese Strinati <span class="track-badge">Invited</span></div>
+          <div class="detail">Secrets of Semantic Communications: From Theory to Experiments and Standardization · CEA-Leti, France</div>
+        </div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row session">
+        <div class="time">16:10 — 16:50</div>
+        <div>
+          <div class="title">Technical Session 4 — Post-Quantum Security and Experimental Datasets <span class="track-badge">2 papers</span></div>
+        </div>
+        <div class="duration">40 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">16:10 — 16:30</div>
+        <div>
+          <div class="title">Energy Efficiency of Post-Quantum Cryptography Across Heterogeneous NVIDIA GPU Platforms: A Batch-Dependent ops/J Analysis of ML-KEM and ML-DSA</div>
+          <div class="detail">Pinelopi-Konstantina Anastasopoulou, Kyriakos Vlachos, Filippo Cugini · University of Patras, Greece; CNIT, Italy</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row paper">
+        <div class="time">16:30 — 16:50</div>
+        <div>
+          <div class="title">Dataset and Experimental Testbed for Deep Learning-Based Bluetooth Device Fingerprinting</div>
+          <div class="detail">Haytham Albousayri, Bechir Hamdaoui · Oregon State University, USA</div>
+        </div>
+        <div class="duration">20 min</div>
+      </div>
+
+      <div class="prog-row">
+        <div class="time">16:50 — 17:00</div>
+        <div>
+          <div class="title">Open discussion and closing remarks</div>
+          <div class="detail">Workshop Co-Chairs</div>
+        </div>
+        <div class="duration">10 min</div>
       </div>
     </div>
+    <p class="tpc-note">→ Program aligned to the NoF 2026 conference time slots. Ten-minute buffers precede the lunch break (12:20–12:30) and the afternoon break (14:50–15:00). Invited-talk titles marked <em>to be confirmed</em> are pending confirmation by the speakers.</p>
   </div>
 </section>
 
@@ -1512,39 +1670,41 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 <section id="keynote">
   <div class="sec-inner">
     <div class="sec-head">
-      <div class="meta"><span>§ 05</span><span class="sep">/</span><span>Keynotes</span></div>
+      <div class="meta"><span>§ 05</span><span class="sep">/</span><span>Invited Talks</span></div>
       <div>
-        <h2>Keynotes.</h2>
-        <p>ERN features keynotes from leading voices in experimental networking. Additional keynotes will be announced here upon confirmation.</p>
+        <h2>Invited talks.</h2>
+        <p>ERN features three invited talks from leading voices in experimental networking.</p>
       </div>
     </div>
     <div class="speakers-grid">
       <div class="spkr confirmed">
         <div class="photo"><img src="assets/photos/valcarenghi.jpg" alt="Prof. Luca Valcarenghi" loading="lazy"></div>
         <div>
-          <div class="role">Keynote · 01</div>
+          <div class="role">Invited talk · 01</div>
           <h4>Prof. Luca Valcarenghi</h4>
           <div class="aff">Scuola Superiore Sant'Anna, Pisa · Italy</div>
-          <p class="talktitle">“Next Generation Mobile Network Experiments: closing the gap between research and deployment”</p>
+          <p class="talktitle">“Next-Generation Mobile Network Experiments: The Potential of Coordinating Federated Learning and RAN Transport”</p>
           <span class="badge" style="border-color:var(--accent); color:var(--accent)">● Confirmed</span>
         </div>
       </div>
-      <div class="spkr">
+      <div class="spkr confirmed">
         <div class="photo">Photo<br>TBA</div>
         <div>
-          <div class="role">Keynote · 02</div>
-          <h4>To be announced</h4>
-          <p class="talk">A second keynote from a leading voice in experimental networking. Announcement forthcoming.</p>
-          <span class="badge">● Awaiting confirmation</span>
+          <div class="role">Invited talk · 02</div>
+          <h4>Luigi Briguglio</h4>
+          <div class="aff">CyberEthics Lab. · Italy</div>
+          <p class="talktitle">Title to be confirmed — SUSTAIN-6G</p>
+          <span class="badge">● Title to be confirmed</span>
         </div>
       </div>
-      <div class="spkr">
-        <div class="photo">Photo<br>TBA</div>
+      <div class="spkr confirmed">
+        <div class="photo"><img src="assets/photos/calvanese-strinati.jpeg" alt="Emilio Calvanese Strinati" loading="lazy" style="object-position:22% center"></div>
         <div>
-          <div class="role">Keynote · 03</div>
-          <h4>To be announced</h4>
-          <p class="talk">A third keynote from a leading voice in experimental networking. Announcement forthcoming.</p>
-          <span class="badge">● Awaiting confirmation</span>
+          <div class="role">Invited talk · 03</div>
+          <h4>Dr. Emilio Calvanese Strinati</h4>
+          <div class="aff">CEA-Leti, Grenoble · France</div>
+          <p class="talktitle">“Secrets of Semantic Communications: From Theory to Experiments and Standardization”</p>
+          <span class="badge" style="border-color:var(--accent); color:var(--accent)">● Confirmed</span>
         </div>
       </div>
     </div>
@@ -1681,29 +1841,9 @@ body[data-hero="dense"] #network-canvas{opacity:1}
     </div>
     <div class="venue-grid">
       <div class="venue-map">
-        <span class="tag" style="position:absolute; top:12px; left:12px">41.9028° N · 12.4964° E</span>
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#d7dde6" stroke-width="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="400" height="300" fill="#f4f6f9"/>
-          <rect width="400" height="300" fill="url(#grid)"/>
-          <!-- river/coast stylized -->
-          <path d="M 0 200 Q 80 180 140 210 T 300 230 T 400 210" fill="none" stroke="#bfd7e8" stroke-width="10" opacity="0.5"/>
-          <path d="M 0 200 Q 80 180 140 210 T 300 230 T 400 210" fill="none" stroke="#00629b" stroke-width="1" opacity="0.3"/>
-          <!-- streets -->
-          <path d="M 50 0 L 50 300 M 120 0 L 120 300 M 200 0 L 200 300 M 280 0 L 280 300 M 350 0 L 350 300" stroke="#d7dde6" stroke-width="0.8"/>
-          <path d="M 0 60 L 400 60 M 0 120 L 400 120 M 0 180 L 400 180 M 0 240 L 400 240" stroke="#d7dde6" stroke-width="0.8"/>
-          <!-- landmarks -->
-          <circle cx="180" cy="140" r="22" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 3"/>
-          <text x="180" y="108" font-family="IBM Plex Mono, monospace" font-size="8" fill="#64748b" text-anchor="middle">COLOSSEUM</text>
-          <circle cx="80" cy="100" r="3" fill="#94a3b8"/>
-          <text x="80" y="90" font-family="IBM Plex Mono, monospace" font-size="7" fill="#64748b" text-anchor="middle">VATICAN</text>
-        </svg>
-        <div class="pin">
-        </div>
+        <iframe title="Map of the ERN 2026 venue, Via Casilina 110b, Rome" src="https://www.openstreetmap.org/export/embed.html?bbox=12.5094%2C41.8770%2C12.5296%2C41.8920&amp;layer=mapnik&amp;marker=41.8845%2C12.5195" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <span class="tag">41.8845° N · 12.5195° E</span>
+        <a class="maplink" href="https://www.openstreetmap.org/?mlat=41.8845&amp;mlon=12.5195#map=16/41.8845/12.5195" target="_blank" rel="noopener">View larger map ↗</a>
       </div>
       <div class="venue-info">
         <div class="coords">41°53′N · 12°31′E · Rome</div>
