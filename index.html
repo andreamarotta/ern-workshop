@@ -233,8 +233,10 @@ body{
   flex-wrap:nowrap;
   min-height:44px;
   overflow-x:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
-.pn-inner::-webkit-scrollbar{display:none}
+.pn-inner::-webkit-scrollbar{display:none; width:0; height:0}
 .primary-nav a{
   color:#cbd9e8;
   font-size:13px;
@@ -255,6 +257,7 @@ body{
   font-size:10px;
   opacity:.55;
 }
+.primary-nav a .lbl-short{display:none}
 .primary-nav .cta{
   margin-left:auto;
   background:var(--accent);
@@ -264,9 +267,17 @@ body{
 }
 .primary-nav .cta:hover{background:#d06e00; color:#fff}
 
+@media(max-width:1250px){
+  .primary-nav a{padding:12px 11px}
+  .primary-nav a .lbl-long{display:none}
+  .primary-nav a .lbl-short{display:inline}
+}
+@media(max-width:1040px){
+  .primary-nav a{padding:11px 8px; font-size:12.5px}
+  .primary-nav a .ix{display:none}
+}
 @media(max-width:900px){
-  .primary-nav a:not(.cta) .ix{display:none}
-  .primary-nav a{padding:10px 12px; font-size:12px}
+  .primary-nav a{padding:10px 8px; font-size:12px}
 }
 
 /* ==== HERO ==== */
@@ -455,6 +466,33 @@ body{
   color:var(--ink-2);
 }
 .cd-target strong{color:var(--accent)}
+
+.cd-closed{display:none}
+.cd-band.is-closed .cd-units{display:none}
+.cd-band.is-closed .cd-target{display:none}
+.cd-band.is-closed .cd-label{display:none}
+.cd-band.is-closed .cd-closed{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  font-size:15px; color:#cfdaea;
+}
+.cd-band.is-closed .cd-closed strong{color:#fff; font-weight:600}
+.cd-closed .cd-cta{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent); color:#fff;
+  padding:9px 16px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+  text-decoration:none;
+}
+.cd-closed .cd-cta:hover{background:#d06e00}
+.date-row.past{opacity:.5}
+.date-row.past.key{background:transparent; border-left-color:var(--rule)}
+.date-row .status.done{color:var(--ink-3)}
+.date-row .status.done::before{
+  content:""; width:6px; height:6px; border-radius:50%; background:#94a3b8;
+}
+
+[hidden]{display:none !important}
 
 /* ==== SECTIONS ==== */
 section{padding:72px 24px; border-bottom:1px solid var(--rule)}
@@ -1229,8 +1267,8 @@ body[data-hero="dense"] #network-canvas{opacity:1}
     <span class="sep">│</span>
     <span>29 Sep 2026</span>
     <div class="right">
-      <span class="live"><span class="pulse"></span>SUBMISSIONS OPEN</span>
-      <a href="#submit">Submit →</a>
+      <span class="live"><span class="pulse"></span>PROGRAMME AVAILABLE</span>
+      <a href="#program">Programme →</a>
     </div>
   </div>
 </div>
@@ -1256,15 +1294,18 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 
 <!-- ==== PRIMARY NAV ==== -->
 <nav class="primary-nav" id="main-nav">
-  <a href="#about"><span class="ix">01</span> Call for Papers</a>
-  <a href="#topics"><span class="ix">02</span> Topics</a>
-  <a href="#dates"><span class="ix">03</span> Dates</a>
-  <a href="#program"><span class="ix">04</span> Program</a>
-  <a href="#keynote"><span class="ix">05</span> Invited Talks</a>
-  <a href="#committee"><span class="ix">06</span> Committee</a>
-  <a href="#submit"><span class="ix">07</span> Author Guidelines</a>
-  <a href="#venue"><span class="ix">08</span> Venue</a>
-  <a href="#submit" class="cta">Submit paper →</a>
+  <div class="pn-inner">
+    <a href="#about"><span class="ix">01</span> <span class="lbl-long">Call for Papers</span><span class="lbl-short">CFP</span></a>
+    <a href="#topics"><span class="ix">02</span> Topics</a>
+    <a href="#dates"><span class="ix">03</span> Dates</a>
+    <a href="#program"><span class="ix">04</span> Program</a>
+    <a href="#keynote"><span class="ix">05</span> Invited Talks</a>
+    <a href="#committee"><span class="ix">06</span> Committee</a>
+    <a href="#submit"><span class="ix">07</span> <span class="lbl-long">Author Guidelines</span><span class="lbl-short">Authors</span></a>
+    <a href="#venue"><span class="ix">08</span> Venue</a>
+    <a href="#submit" class="cta" data-cfp-open>Submit paper →</a>
+    <a href="#program" class="cta" data-cfp-closed hidden>Programme →</a>
+  </div>
 </nav>
 
 <!-- ==== HERO ==== -->
@@ -1275,7 +1316,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
     <div class="hero-labels">
       <span class="tag ieee"><span class="dot"></span>NoF 2026 · Workshop Track</span>
       <span class="tag"><span class="dot"></span>Full-day · Sept 29, 2026</span>
-      <span class="tag bright"><span class="dot"></span>Call for Papers Open</span>
+      <span class="tag bright"><span class="dot"></span>Programme Available</span>
     </div>
 
     <h1 class="hero-title">
@@ -1285,9 +1326,10 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       A full-day NoF 2026 workshop for testbed-driven, reproducible, hardware-in-the-loop research across 5G/6G, O-RAN, optical, quantum and programmable networks.
     </p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#submit">Submit a paper <span class="arrow">→</span></a>
-      <a class="btn btn-ghost" href="#about">Read the CFP</a>
-      <a class="btn btn-ghost" href="#program">View program</a>
+      <a class="btn btn-primary" href="#submit" data-cfp-open>Submit a paper <span class="arrow">→</span></a>
+      <a class="btn btn-primary" href="#program" data-cfp-closed hidden>View the programme <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="#keynote">Invited talks</a>
+      <a class="btn btn-ghost" href="#about">About ERN</a>
     </div>
 
     <div class="hero-facts">
@@ -1316,16 +1358,20 @@ body[data-hero="dense"] #network-canvas{opacity:1}
 </section>
 
 <!-- ==== COUNTDOWN BAND ==== -->
-<div class="cd-band">
+<div class="cd-band" id="cd-band" data-deadline="2026-07-24T23:59:59Z" data-event="2026-09-29T17:00:00+02:00">
   <div class="cd-inner">
-    <div class="cd-label">⚑ <strong>Paper submission</strong> closes in</div>
+    <div class="cd-label" id="cd-label">⚑ <strong>Paper submission</strong> closes in</div>
     <div class="cd-units" id="countdown">
       <div class="cd-unit"><div class="num" data-u="d">—</div><div class="u">Days</div></div>
       <div class="cd-unit"><div class="num" data-u="h">—</div><div class="u">Hours</div></div>
       <div class="cd-unit"><div class="num" data-u="m">—</div><div class="u">Min</div></div>
       <div class="cd-unit"><div class="num" data-u="s">—</div><div class="u">Sec</div></div>
     </div>
-    <div class="cd-target">TARGET: <strong>24 Jul 2026 · 23:59 AoE (extended)</strong></div>
+    <div class="cd-closed" id="cd-closed">
+      <strong>Submissions are closed.</strong> The full technical programme is now available.
+      <a class="cd-cta" href="#program">View the programme →</a>
+    </div>
+    <div class="cd-target" id="cd-target">TARGET: <strong>24 Jul 2026 · 23:59 AoE (extended)</strong></div>
   </div>
 </div>
 
@@ -1350,7 +1396,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <p>Accepted and presented papers will be published in the <strong>NoF 2026 Conference Proceedings</strong> and submitted to <strong>IEEE Xplore®</strong>, subject to quality review and the standard presentation / registration requirements of the host conference.</p>
         <div class="scope-callout">
           <span class="icon">→</span>
-          <div><strong>Note for authors —</strong> Authors interested in demonstrating a working system related to their workshop paper are encouraged to <em>also</em> submit to the NoF Demo track. The current program is tentative — we welcome strong submissions and will expand the program if needed.</div>
+          <div><strong>Note for authors —</strong> Authors of accepted papers interested in demonstrating a working system related to their workshop paper are encouraged to <em>also</em> submit to the NoF Demo track.</div>
         </div>
       </div>
       <aside class="about-side">
@@ -1417,19 +1463,19 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       <div class="date-row key">
         <div class="when">2026-07-24</div>
         <div class="what">Paper submission <span class="mute">— via EDAS (extended)</span></div>
-        <div class="status open">Open — submit now</div>
+        <div class="status open" data-done-label="Closed">Open — submit now</div>
         <div class="aoe">AoE</div>
       </div>
       <div class="date-row">
         <div class="when">2026-08-15</div>
         <div class="what">Acceptance notification</div>
-        <div class="status upcoming">Upcoming</div>
+        <div class="status upcoming" data-done-label="Notified">Upcoming</div>
         <div class="aoe">—</div>
       </div>
       <div class="date-row">
         <div class="when">2026-08-25</div>
         <div class="what">Camera-ready submission</div>
-        <div class="status upcoming">Upcoming</div>
+        <div class="status upcoming" data-done-label="Received">Upcoming</div>
         <div class="aoe">AoE</div>
       </div>
       <div class="date-row key">
@@ -1792,7 +1838,7 @@ body[data-hero="dense"] #network-canvas{opacity:1}
       <div class="meta"><span>§ 07</span><span class="sep">/</span><span>Author Guidelines</span></div>
       <div>
         <h2>Author guidelines.</h2>
-        <p>Standard 2-column conference format, submitted through EDAS. All submissions are single-blind peer-reviewed by TPC members.</p>
+        <p>Reference information for the 2026 edition: papers followed the standard 2-column conference format and were submitted through EDAS, with single-blind peer review by TPC members.</p>
       </div>
     </div>
     <div class="submit-grid">
@@ -1818,11 +1864,16 @@ body[data-hero="dense"] #network-canvas{opacity:1}
           <li>A discussion of threats to validity and deployment implications.</li>
         </ol>
         <div class="edas-panel">
-          <div>
+          <div data-cfp-open>
             <div class="l">Submit via</div>
             <div class="t">EDAS — submission system</div>
           </div>
-          <a class="btn btn-primary" href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener">Open EDAS →</a>
+          <a class="btn btn-primary" href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener" data-cfp-open>Open EDAS →</a>
+          <div data-cfp-closed hidden>
+            <div class="l">Submissions closed</div>
+            <div class="t">Submissions closed on 24 July 2026 — the accepted papers appear in the programme.</div>
+          </div>
+          <a class="btn btn-primary" href="#program" data-cfp-closed hidden>View the programme →</a>
         </div>
       </div>
     </div>
@@ -1916,7 +1967,8 @@ body[data-hero="dense"] #network-canvas{opacity:1}
         <h5>Submit</h5>
         <ul>
           <li><a href="#submit">Author guidelines</a></li>
-          <li><a href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener">EDAS ↗</a></li>
+          <li><a href="https://edas.info/newPaper.php?c=35286" target="_blank" rel="noopener" data-cfp-open>EDAS ↗</a></li>
+          <li><a href="#program" data-cfp-closed hidden>Programme</a></li>
           <li><a href="#">Paper template ↗</a></li>
           <li><a href="#">WikiCFP ↗</a></li>
         </ul>
@@ -1948,22 +2000,63 @@ const TWEAK_DEFAULTS = {
 /*EDITMODE-END*/
 
 // Countdown
-const deadline = new Date('2026-07-24T23:59:59Z').getTime();
-function tickCountdown(){
-  const now = Date.now();
-  let diff = Math.max(0, deadline - now);
-  const d = Math.floor(diff/86400000); diff -= d*86400000;
-  const h = Math.floor(diff/3600000);  diff -= h*3600000;
-  const m = Math.floor(diff/60000);    diff -= m*60000;
-  const s = Math.floor(diff/1000);
-  const el = document.getElementById('countdown');
-  el.querySelector('[data-u="d"]').textContent = String(d).padStart(3,'0');
-  el.querySelector('[data-u="h"]').textContent = String(h).padStart(2,'0');
-  el.querySelector('[data-u="m"]').textContent = String(m).padStart(2,'0');
-  el.querySelector('[data-u="s"]').textContent = String(s).padStart(2,'0');
-}
-tickCountdown();
-setInterval(tickCountdown, 1000);
+// Countdown band: counts down before the deadline, then switches to a closed state.
+(function(){
+  const band = document.getElementById('cd-band');
+  if(!band) return;
+  const deadline = new Date(band.dataset.deadline).getTime();
+  const units = document.getElementById('countdown');
+  let timer = null;
+
+  function renderOpen(){
+    let diff = deadline - Date.now();
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000);  diff -= h*3600000;
+    const m = Math.floor(diff/60000);    diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    units.querySelector('[data-u="d"]').textContent = String(d).padStart(3,'0');
+    units.querySelector('[data-u="h"]').textContent = String(h).padStart(2,'0');
+    units.querySelector('[data-u="m"]').textContent = String(m).padStart(2,'0');
+    units.querySelector('[data-u="s"]').textContent = String(s).padStart(2,'0');
+  }
+
+  function applyPhase(closed){
+    document.querySelectorAll('[data-cfp-open]').forEach(el => { el.hidden = closed; });
+    document.querySelectorAll('[data-cfp-closed]').forEach(el => { el.hidden = !closed; });
+  }
+
+  function tick(){
+    if(Date.now() >= deadline){
+      band.classList.add('is-closed');
+      applyPhase(true);
+      if(timer) clearInterval(timer);
+      return;
+    }
+    band.classList.remove('is-closed');
+    applyPhase(false);
+    renderOpen();
+  }
+  tick();
+  if(!band.classList.contains('is-closed')) timer = setInterval(tick, 1000);
+})();
+
+// Important-dates table: derive each row's status from its date.
+(function(){
+  const rows = [...document.querySelectorAll('.date-row')];
+  const today = new Date(); today.setHours(0,0,0,0);
+  rows.forEach(row => {
+    const whenEl = row.querySelector('.when');
+    const statusEl = row.querySelector('.status');
+    if(!whenEl || !statusEl) return;
+    const when = new Date(whenEl.textContent.trim() + 'T23:59:59');
+    const isPast = when.getTime() < today.getTime();
+    row.classList.toggle('past', isPast);
+    if(isPast){
+      statusEl.className = 'status done';
+      statusEl.textContent = statusEl.dataset.doneLabel || 'Completed';
+    }
+  });
+})();
 
 // Network graph — IEEE blue tones on dark
 (function(){
